@@ -1,0 +1,44 @@
+{
+  "name": "antd-editable",
+  "version": "1.0.0",
+  "repository": "git@github.com:Alkaids/antd-editable.git",
+  "author": "jinxin0112 <18508218948@163.com>",
+  "license": "MIT",
+  "config": {
+    "port": 8000
+  },
+  "scripts": {
+    "build": "rc-tools run build",
+    "compile": "rc-tools run compile --babel-runtime",
+    "gh-pages": "rc-tools run gh-pages",
+    "start": "rc-tools run server",
+    "pub": "rc-tools run pub --babel-runtime",
+    "lint": "rc-tools run lint",
+    "lint:fix": "rc-tools run lint --fix",
+    "test": "jest",
+    "prepublish": "rc-tools run guard",
+    "coverage": "jest --coverage"
+  },
+  "dependencies": {
+    "rc-tools": "^9.3.11"
+  },
+  "devDependencies": {
+    "antd": "^3.15.2",
+    "babel-plugin-import": "^1.11.0",
+    "immer": "^2.1.4",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "babel": {
+    "plugins": [
+      [
+        "import",
+        {
+          "libraryName": "antd",
+          "libraryDirectory": "es",
+          "style": "css"
+        }
+      ]
+    ]
+  }
+}
