@@ -11502,14 +11502,14 @@ textarea.ant-input {
 .editable .ant-form-item-control {
   line-height: 24px;
 }
-.editable .editable-cell-uneditable {
+.editable-cell-uneditable {
   padding: 5px 12px;
 }
-.editable .editable-cell-value-wrap {
+.editable-cell-value-wrap {
   padding: 5px 12px;
   cursor: pointer;
 }
-.editable .editable-row:hover .editable-cell-value-wrap {
+.editable-row:hover .editable-cell-value-wrap {
   border: 1px solid #d9d9d9;
   border-radius: 4px;
   padding: 4px 11px;
