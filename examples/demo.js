@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import Editable from "../src/index";
+import "../assets/index.less";
 
 const warraperStyle = {
   width: 600,

@@ -2,7 +2,6 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Table, Form } from "antd";
 import produce from "immer";
 import computedEditColumns from "./computedEditColumns";
-import "./index.css";
 
 function Editable({
   dataSource = [],
