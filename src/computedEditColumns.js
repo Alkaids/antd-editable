@@ -8,8 +8,8 @@ function hasData(data) {
     return "--";
   }
 }
-
 export default (columns, curCell, setCurCell, form) => {
+  const dataIndexMap = [];
   const loopColumns = columns => {
     return columns.map(item => {
       if (item.children) {
@@ -28,6 +28,9 @@ export default (columns, curCell, setCurCell, form) => {
           children,
           ...res
         } = item;
+        if (editable) {
+          dataIndexMap.push(dataIndex);
+        }
         const resItem = {
           dataIndex,
           ...res,
@@ -59,5 +62,8 @@ export default (columns, curCell, setCurCell, form) => {
       }
     });
   };
-  return loopColumns(columns);
+  return {
+    editColumns: loopColumns(columns),
+    dataIndexMap
+  };
 };
