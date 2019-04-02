@@ -13,7 +13,6 @@
   "license": "MIT",
   "main": "./lib/index",
   "module": "./es/index",
-  "style": "./assets/index.css",
   "files": [
     "es",
     "lib"
@@ -22,7 +21,6 @@
     "port": 8000,
     "entry": {
       "antd-editable": [
-        "./assets/index.less",
         "./src/index.js"
       ]
     }
