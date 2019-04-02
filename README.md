@@ -27,14 +27,6 @@
     $ yarn add antd-editable
 ```
 
-### 样式
-
-需单独引入 antd-editable 下的样式文件
-
-```js
-import "antd-editable/assets/index.css";
-```
-
 ### 使用
 
 默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。
