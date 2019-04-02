@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo, useRef } from "react";
 import { Table, Form } from "antd";
 import produce from "immer";
 import computedEditColumns from "./computedEditColumns";
+import EditableWrapper from './style/EditableWrapper';
 
 function Editable({
   dataSource = [],
@@ -30,14 +31,16 @@ function Editable({
     beforeCell.current = curCell;
   }, [curCell]);
   return (
-    <Table
-      className="editable"
-      dataSource={cacheSource}
-      columns={editColumns}
-      rowClassName={() => "editable-row"}
-      {...resProps}
-      pagination={false}
-    />
+    <EditableWrapper>
+      <Table
+        className="editable"
+        dataSource={cacheSource}
+        columns={editColumns}
+        rowClassName={() => "editable-row"}
+        {...resProps}
+        pagination={false}
+      />
+    </EditableWrapper>
   );
 }
 

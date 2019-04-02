@@ -1,6 +1,6 @@
 {
   "name": "antd-editable",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "homepage": "http://github.com/Alkaids/antd-editable",
   "repository": "git@github.com:Alkaids/antd-editable.git",
   "author": "jinxin0112 <18508218948@163.com>",
@@ -15,7 +15,6 @@
   "module": "./es/index",
   "style": "./assets/index.css",
   "files": [
-    "assets/*.css",
     "es",
     "lib"
   ],
@@ -43,7 +42,8 @@
   "dependencies": {
     "@babel/runtime": "^7.4.2",
     "husky": "^1.3.1",
-    "rc-tools": "^9.3.11"
+    "rc-tools": "^9.3.11",
+    "styled-components": "^4.2.0"
   },
   "devDependencies": {
     "antd": "^3.15.2",

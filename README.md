@@ -1,12 +1,14 @@
 # 可编辑表格(React hooks)
 
 ## 介绍
+
 一个基于 [antd](https://ant.design/index-cn) 的 React 组件， 可以编辑表格的内容并实时保存。
 
 ## TODO
 
-- [x] 行列可编辑  
-- [ ] css in js
+- [x] 行列可编辑
+- [x] css in js
+- [ ] tab 键切换
 - [ ] 未保存数据提示
 - [ ] 自定义表单数据校验
 - [ ] 可分页
@@ -14,11 +16,13 @@
 - [ ] 自动化测试
 
 ## 何时使用
+
 当表格涉及到内容的修改的时候
 
 ## 如何使用
 
 ### 安装
+
 ```
     $ yarn add antd-editable
 ```
@@ -26,15 +30,17 @@
 ### 样式
 
 需单独引入 antd-editable 下的样式文件
+
 ```js
-    import 'antd-editable/assets/index.css';
+import "antd-editable/assets/index.css";
 ```
 
 ### 使用
 
-默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。
+默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。
 
 ### 示例代码
+
 ```js
     import Editable from 'antd-editable';
     import 'antd-editable/assets/index.css';
@@ -87,11 +93,11 @@
         console.log(nextSource);
     }
 
-    <Editable 
-        dataSource={dataSource} 
-        columns={columns} 
+    <Editable
+        dataSource={dataSource}
+        columns={columns}
         onChange={handleTableChange}
-        bordered 
+        bordered
     />
 
     ...
@@ -99,7 +105,8 @@
 
 ### API
 
-同 [antd-table](https://ant.design/components/table-cn/) 的API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。目前仅支持受控
+同 [antd-table](https://ant.design/components/table-cn/) 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。目前仅支持受控
+
 <table>
     <thead>
         <tr>
