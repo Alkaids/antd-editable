@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>antd-editable@1.1.0 - </title>
+  <title>antd-editable@1.2.0 - </title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>antd-editable@1.1.0</h1>
+  <h1>antd-editable@1.2.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -756,16 +756,15 @@
 <h2>TODO<a id="user-content-todo" name="todo" class="anchor" aria-hidden="true" href="#todo"><span class="octicon octicon-link"></span></a></h2><ul>
 <li>[x] 行列可编辑</li>
 <li>[x] css in js</li>
-<li>[ ] tab 键切换</li>
+<li>[x] tab 键切换</li>
 <li>[ ] 未保存数据提示</li>
 <li>[ ] 自定义表单数据校验</li>
 <li>[ ] 可分页</li>
-<li>[ ] 非受控组件</li>
 <li>[ ] 自动化测试</li>
+<li>[ ] ts 重构</li>
 </ul>
 <h2>何时使用<a id="user-content-何时使用" name="何时使用" class="anchor" aria-hidden="true" href="#何时使用"><span class="octicon octicon-link"></span></a></h2><p>当表格涉及到内容的修改的时候</p>
-<h2>如何使用<a id="user-content-如何使用" name="如何使用" class="anchor" aria-hidden="true" href="#如何使用"><span class="octicon octicon-link"></span></a></h2><h3>安装<a id="user-content-安装" name="安装" class="anchor" aria-hidden="true" href="#安装"><span class="octicon octicon-link"></span></a></h3><div class="highlight"><pre><code language="undefined">    $ yarn add antd-editable</code></pre></div><h3>样式<a id="user-content-样式" name="样式" class="anchor" aria-hidden="true" href="#样式"><span class="octicon octicon-link"></span></a></h3><p>需单独引入 antd-editable 下的样式文件</p>
-<div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> <span class="hljs-string">"antd-editable/assets/index.css"</span>;</code></pre></div><h3>使用<a id="user-content-使用" name="使用" class="anchor" aria-hidden="true" href="#使用"><span class="octicon octicon-link"></span></a></h3><p>默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。</p>
+<h2>如何使用<a id="user-content-如何使用" name="如何使用" class="anchor" aria-hidden="true" href="#如何使用"><span class="octicon octicon-link"></span></a></h2><h3>安装<a id="user-content-安装" name="安装" class="anchor" aria-hidden="true" href="#安装"><span class="octicon octicon-link"></span></a></h3><div class="highlight"><pre><code language="undefined">    $ yarn add antd-editable</code></pre></div><h3>使用<a id="user-content-使用" name="使用" class="anchor" aria-hidden="true" href="#使用"><span class="octicon octicon-link"></span></a></h3><p>默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。</p>
 <h3>示例代码<a id="user-content-示例代码" name="示例代码" class="anchor" aria-hidden="true" href="#示例代码"><span class="octicon octicon-link"></span></a></h3><div class="highlight"><pre><code language="js">    <span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">'antd-editable'</span>;
     <span class="hljs-keyword">import</span> <span class="hljs-string">'antd-editable/assets/index.css'</span>;
     ...

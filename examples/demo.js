@@ -74808,9 +74808,13 @@ function Editable() {
       setCacheSource = _useState4[1];
 
   var beforeCell = Object(react__WEBPACK_IMPORTED_MODULE_4__["useRef"])(null);
-  var editColumns = Object(react__WEBPACK_IMPORTED_MODULE_4__["useMemo"])(function () {
+
+  var _useMemo = Object(react__WEBPACK_IMPORTED_MODULE_4__["useMemo"])(function () {
     return Object(_computedEditColumns__WEBPACK_IMPORTED_MODULE_6__["default"])(columns, curCell, setCurCell, form);
-  }, [columns, curCell]);
+  }, [columns, curCell]),
+      editColumns = _useMemo.editColumns,
+      dataIndexMap = _useMemo.dataIndexMap;
+
   Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
     if (beforeCell.current) {
       var _beforeCell$current = beforeCell.current,
@@ -74823,7 +74827,51 @@ function Editable() {
     }
 
     beforeCell.current = curCell;
-  }, [curCell]);
+  }, [curCell]); // tab 切换
+
+  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
+    function getNextRowIndex(preRowIndex) {
+      var length = cacheSource.length;
+      var i = preRowIndex + 1;
+
+      for (; i < length; i++) {
+        if (cacheSource[i].editable !== false) {
+          return i;
+        }
+      }
+
+      return false;
+    }
+
+    function handleTabChange(e) {
+      if (e.keyCode === 9 && curCell !== null) {
+        e.preventDefault();
+        var rowIndex = curCell.rowIndex,
+            dataIndex = curCell.dataIndex;
+        var index = dataIndexMap.indexOf(dataIndex);
+        var changeRow = index === dataIndexMap.length - 1;
+        var nextRow = getNextRowIndex(rowIndex);
+        var canChangeRow = cacheSource.length - 1 >= rowIndex + 1 && !!nextRow;
+        var nextCell;
+
+        if (changeRow && !canChangeRow) {
+          nextCell = null;
+        } else {
+          nextCell = {
+            rowIndex: changeRow ? nextRow : rowIndex,
+            dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1]
+          };
+        }
+
+        setCurCell(nextCell);
+      }
+    }
+
+    window.addEventListener("keydown", handleTabChange);
+    return function () {
+      window.removeEventListener("keydown", handleTabChange);
+    };
+  });
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
     className: "editable",
     dataSource: cacheSource,
@@ -74872,6 +74920,8 @@ function hasData(data) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (function (columns, curCell, setCurCell, form) {
+  var dataIndexMap = [];
+
   var loopColumns = function loopColumns(columns) {
     return columns.map(function (item) {
       if (item.children) {
@@ -74890,6 +74940,10 @@ function hasData(data) {
             rules = item.rules,
             _children = item.children,
             res = _objectWithoutProperties(item, ["render", "dataIndex", "editable", "validator", "rules", "children"]);
+
+        if (editable) {
+          dataIndexMap.push(dataIndex);
+        }
 
         var resItem = _objectSpread({
           dataIndex: dataIndex
@@ -74924,7 +74978,10 @@ function hasData(data) {
     });
   };
 
-  return loopColumns(columns);
+  return {
+    editColumns: loopColumns(columns),
+    dataIndexMap: dataIndexMap
+  };
 });
 
 /***/ }),
