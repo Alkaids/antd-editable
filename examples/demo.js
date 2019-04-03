@@ -12,7 +12,7 @@ const dataSource = [
     key: "1",
     name: "金鑫",
     age: 16,
-    address: "慕和兰道304",
+    address: "慕和兰道304"
   },
   {
     key: "2",
@@ -50,14 +50,22 @@ const columns = [
   }
 ];
 
+function handleTableChange(nextSource) {
+  console.log(nextSource); 
+}
+
 function App() {
   return (
     <div style={warraperStyle}>
       <h3>antd-editable</h3>
-      <Editable dataSource={dataSource} columns={columns} bordered />
+      <Editable
+        dataSource={dataSource}
+        columns={columns}
+        bordered
+        onChange={handleTableChange}
+      />
     </div>
   );
 }
 
-ReactDOM.render(<App />, document.getElementById('__react-content'));
-
+ReactDOM.render(<App />, document.getElementById("__react-content"));

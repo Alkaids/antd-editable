@@ -4,14 +4,15 @@ import produce from "immer";
 import computedEditColumns from "./computedEditColumns";
 import EditableWrapper from "./style/EditableWrapper";
 
+function noop() {}
+
 function Editable({
   dataSource = [],
   columns = [],
-  onChange,
+  onChange = noop,
   form,
   ...resProps
 } = {}) {
-
   const [curCell, setCurCell] = useState(null);
   const [cacheSource, setCacheSource] = useState(dataSource);
   const beforeCell = useRef(null);
@@ -24,11 +25,11 @@ function Editable({
     if (beforeCell.current) {
       const { dataIndex, rowIndex } = beforeCell.current;
       const value = form.getFieldValue(`${dataIndex}-${rowIndex}`);
-      setCacheSource(
-        produce(cacheSource, draft => {
-          draft[rowIndex][dataIndex] = value;
-        })
-      );
+      const nextSource = produce(cacheSource, draft => {
+        draft[rowIndex][dataIndex] = value;
+      });
+      setCacheSource(nextSource);
+      onChange(nextSource);
     }
     beforeCell.current = curCell;
   }, [curCell]);
@@ -85,7 +86,6 @@ function Editable({
       />
     </EditableWrapper>
   );
-  
 }
 
 export default Form.create()(Editable);
