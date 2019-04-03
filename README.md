@@ -19,11 +19,12 @@
 
 默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。
 
+每一次输入框失焦后，会在组件内部保存一个新的 dataSource ，可以传入一个 onChange 的回调函数用于捕获这个实时的 dataSource 用于一些类似 dispatch 的操作。
+
 ### 示例代码
 
 ```js
     import Editable from 'antd-editable';
-    import 'antd-editable/assets/index.css';
     ...
 
    const dataSource = [
