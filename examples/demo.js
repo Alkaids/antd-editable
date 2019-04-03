@@ -141,17 +141,22 @@ var columns = [{
   editable: false
 }];
 
+function handleTableChange(nextSource) {
+  console.log(nextSource);
+}
+
 function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: warraperStyle
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "antd-editable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataSource: dataSource,
     columns: columns,
-    bordered: true
+    bordered: true,
+    onChange: handleTableChange
   }));
 }
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('__react-content'));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("__react-content"));
 
 /***/ }),
 
@@ -74786,6 +74791,8 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 
+function noop() {}
+
 function Editable() {
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -74793,7 +74800,8 @@ function Editable() {
       dataSource = _ref$dataSource === void 0 ? [] : _ref$dataSource,
       _ref$columns = _ref.columns,
       columns = _ref$columns === void 0 ? [] : _ref$columns,
-      onChange = _ref.onChange,
+      _ref$onChange = _ref.onChange,
+      onChange = _ref$onChange === void 0 ? noop : _ref$onChange,
       form = _ref.form,
       resProps = _objectWithoutProperties(_ref, ["dataSource", "columns", "onChange", "form"]);
 
@@ -74821,9 +74829,11 @@ function Editable() {
           dataIndex = _beforeCell$current.dataIndex,
           rowIndex = _beforeCell$current.rowIndex;
       var value = form.getFieldValue("".concat(dataIndex, "-").concat(rowIndex));
-      setCacheSource(Object(immer__WEBPACK_IMPORTED_MODULE_5__["default"])(cacheSource, function (draft) {
+      var nextSource = Object(immer__WEBPACK_IMPORTED_MODULE_5__["default"])(cacheSource, function (draft) {
         draft[rowIndex][dataIndex] = value;
-      }));
+      });
+      setCacheSource(nextSource);
+      onChange(nextSource);
     }
 
     beforeCell.current = curCell;
@@ -74990,15 +75000,12 @@ function hasData(data) {
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/*! exports provided: Editable, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editable */ "./src/Editable.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "Editable", function() { return _Editable__WEBPACK_IMPORTED_MODULE_0__["default"]; });
-
-
 
 /* harmony default export */ __webpack_exports__["default"] = (_Editable__WEBPACK_IMPORTED_MODULE_0__["default"]);
 

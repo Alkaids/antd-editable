@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>demo.js - example - antd-editable@1.2.0</title>
+  <title>demo.js - example - antd-editable@1.2.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>antd-editable@1.2.0</h1>
+      <h1>antd-editable@1.2.1</h1>
 
       <p></p>
     </div>
@@ -283,7 +283,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     key: <span class="hljs-string">"1"</span>,
     name: <span class="hljs-string">"金鑫"</span>,
     age: <span class="hljs-number">16</span>,
-    address: <span class="hljs-string">"慕和兰道304"</span>,
+    address: <span class="hljs-string">"慕和兰道304"</span>
   },
   {
     key: <span class="hljs-string">"2"</span>,
@@ -321,17 +321,25 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   }
 ];
 
+<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleTableChange</span>(<span class="hljs-params">nextSource</span>) </span>{
+  <span class="hljs-built_in">console</span>.log(nextSource); 
+}
+
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{warraperStyle}</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>antd-editable<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">Editable</span> <span class="hljs-attribute">dataSource</span>=<span class="hljs-value">{dataSource}</span> <span class="hljs-attribute">columns</span>=<span class="hljs-value">{columns}</span> <span class="hljs-attribute">bordered</span> /&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">Editable</span>
+        <span class="hljs-attribute">dataSource</span>=<span class="hljs-value">{dataSource}</span>
+        <span class="hljs-attribute">columns</span>=<span class="hljs-value">{columns}</span>
+        <span class="hljs-attribute">bordered</span>
+        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{handleTableChange}</span>
+      /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   )</span>;
 }
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById('__react-content'));
-
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById("__react-content"));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/Alkaids/antd-editable">
