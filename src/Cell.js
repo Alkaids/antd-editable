@@ -32,7 +32,11 @@ function Cell(props) {
     });
   }
   function handleSave() {
-    onSetCurCell(null);
+    form.validateFields([`${dataIndex}-${rowIndex}`], err => {
+      if (!err) {
+        onSetCurCell(null);
+      }
+    });
   }
   const stockCell = (
     <div onClick={handleSetCurCell} className="editable-cell-value-wrap">
