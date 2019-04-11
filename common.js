@@ -1,164 +1,4 @@
-/******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
-/******/
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
-/******/
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId]) {
-/******/ 			return installedModules[moduleId].exports;
-/******/ 		}
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			i: moduleId,
-/******/ 			l: false,
-/******/ 			exports: {}
-/******/ 		};
-/******/
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
-/******/
-/******/ 		// Flag the module as loaded
-/******/ 		module.l = true;
-/******/
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
-/******/
-/******/
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
-/******/
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
-/******/
-/******/ 	// define getter function for harmony exports
-/******/ 	__webpack_require__.d = function(exports, name, getter) {
-/******/ 		if(!__webpack_require__.o(exports, name)) {
-/******/ 			Object.defineProperty(exports, name, { enumerable: true, get: getter });
-/******/ 		}
-/******/ 	};
-/******/
-/******/ 	// define __esModule on exports
-/******/ 	__webpack_require__.r = function(exports) {
-/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
-/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
-/******/ 		}
-/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
-/******/ 	};
-/******/
-/******/ 	// create a fake namespace object
-/******/ 	// mode & 1: value is a module id, require it
-/******/ 	// mode & 2: merge all properties of value into the ns
-/******/ 	// mode & 4: return value when already ns object
-/******/ 	// mode & 8|1: behave like require
-/******/ 	__webpack_require__.t = function(value, mode) {
-/******/ 		if(mode & 1) value = __webpack_require__(value);
-/******/ 		if(mode & 8) return value;
-/******/ 		if((mode & 4) && typeof value === 'object' && value && value.__esModule) return value;
-/******/ 		var ns = Object.create(null);
-/******/ 		__webpack_require__.r(ns);
-/******/ 		Object.defineProperty(ns, 'default', { enumerable: true, value: value });
-/******/ 		if(mode & 2 && typeof value != 'string') for(var key in value) __webpack_require__.d(ns, key, function(key) { return value[key]; }.bind(null, key));
-/******/ 		return ns;
-/******/ 	};
-/******/
-/******/ 	// getDefaultExport function for compatibility with non-harmony modules
-/******/ 	__webpack_require__.n = function(module) {
-/******/ 		var getter = module && module.__esModule ?
-/******/ 			function getDefault() { return module['default']; } :
-/******/ 			function getModuleExports() { return module; };
-/******/ 		__webpack_require__.d(getter, 'a', getter);
-/******/ 		return getter;
-/******/ 	};
-/******/
-/******/ 	// Object.prototype.hasOwnProperty.call
-/******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
-/******/
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
-/******/
-/******/
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
-/******/ })
-/************************************************************************/
-/******/ ({
-
-/***/ "./examples/demo.js":
-/*!**************************!*\
-  !*** ./examples/demo.js ***!
-  \**************************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
-/* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/index */ "./src/index.js");
-
-
-
-var warraperStyle = {
-  width: 600,
-  margin: "50px auto"
-};
-var dataSource = [{
-  key: "1",
-  name: "金鑫",
-  age: 16,
-  address: "慕和兰道304"
-}, {
-  key: "2",
-  name: "张海新",
-  age: 17,
-  address: "慕和兰道304",
-  editable: false
-}, {
-  key: "3",
-  name: "李鳌",
-  age: 15,
-  address: "慕和兰道304"
-}];
-var columns = [{
-  title: "姓名",
-  dataIndex: "name",
-  key: "name",
-  width: "30%"
-}, {
-  title: "年龄",
-  dataIndex: "age",
-  key: "age",
-  width: "30%"
-}, {
-  title: "住址",
-  dataIndex: "address",
-  key: "address",
-  editable: false
-}];
-
-function handleTableChange(nextSource) {
-  console.log(nextSource);
-}
-
-function App() {
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    style: warraperStyle
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "antd-editable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    dataSource: dataSource,
-    columns: columns,
-    bordered: true,
-    onChange: handleTableChange
-  }));
-}
-
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("__react-content"));
-
-/***/ }),
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([["common"],{
 
 /***/ "./node_modules/@ant-design/icons-react/es/components/Icon.js":
 /*!********************************************************************!*\
@@ -74708,7 +74548,9 @@ function Cell(props) {
       rowIndex = props.rowIndex,
       curCell = props.curCell,
       onSetCurCell = props.onSetCurCell,
-      initialValue = props.initialValue;
+      initialValue = props.initialValue,
+      _props$rules = props.rules,
+      rules = _props$rules === void 0 ? [] : _props$rules;
   var isEditing = curCell && curCell.dataIndex === dataIndex && curCell.rowIndex === rowIndex;
   var inputRef = react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef();
   Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
@@ -74725,7 +74567,11 @@ function Cell(props) {
   }
 
   function handleSave() {
-    onSetCurCell(null);
+    form.validateFields(["".concat(dataIndex, "-").concat(rowIndex)], function (err) {
+      if (!err) {
+        onSetCurCell(null);
+      }
+    });
   }
 
   var stockCell = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
@@ -74734,10 +74580,11 @@ function Cell(props) {
   }, initialValue);
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
     style: {
-      textAlign: "left"
+      textAlign: 'left'
     }
   }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Item, null, form.getFieldDecorator("".concat(dataIndex, "-").concat(rowIndex), {
-    initialValue: initialValue === "--" ? "" : initialValue
+    initialValue: initialValue === '--' ? '' : initialValue,
+    rules: rules
   })(isEditing ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_input__WEBPACK_IMPORTED_MODULE_1__["default"], {
     ref: inputRef,
     onPressEnter: handleSave,
@@ -74877,9 +74724,9 @@ function Editable() {
       }
     }
 
-    window.addEventListener("keydown", handleTabChange);
+    window.addEventListener('keydown', handleTabChange);
     return function () {
-      window.removeEventListener("keydown", handleTabChange);
+      window.removeEventListener('keydown', handleTabChange);
     };
   });
   return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
@@ -74887,7 +74734,7 @@ function Editable() {
     dataSource: cacheSource,
     columns: editColumns,
     rowClassName: function rowClassName() {
-      return "editable-row";
+      return 'editable-row';
     }
   }, resProps, {
     pagination: false
@@ -74922,10 +74769,10 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
  // 给空数据一个占位符
 
 function hasData(data) {
-  if (data != null && data !== "") {
+  if (data != null && data !== '') {
     return data;
   } else {
-    return "--";
+    return '--';
   }
 }
 
@@ -74946,10 +74793,9 @@ function hasData(data) {
             dataIndex = item.dataIndex,
             _item$editable = item.editable,
             editable = _item$editable === void 0 ? true : _item$editable,
-            validator = item.validator,
             rules = item.rules,
             _children = item.children,
-            res = _objectWithoutProperties(item, ["render", "dataIndex", "editable", "validator", "rules", "children"]);
+            res = _objectWithoutProperties(item, ["render", "dataIndex", "editable", "rules", "children"]);
 
         if (editable) {
           dataIndexMap.push(dataIndex);
@@ -74972,7 +74818,8 @@ function hasData(data) {
                 rowIndex: rowIndex,
                 curCell: curCell,
                 onSetCurCell: setCurCell,
-                initialValue: initialValue
+                initialValue: initialValue,
+                rules: rules
               };
               return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], cellprops);
             } else {
@@ -75038,19 +74885,7 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 var EditableWrapper = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 /* harmony default export */ __webpack_exports__["default"] = (EditableWrapper);
 
-/***/ }),
-
-/***/ 0:
-/*!********************************!*\
-  !*** multi ./examples/demo.js ***!
-  \********************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! ./examples/demo.js */"./examples/demo.js");
-
-
 /***/ })
 
-/******/ });
-//# sourceMappingURL=demo.js.map
+}]);
+//# sourceMappingURL=common.js.map
