@@ -2,6 +2,8 @@
 
 一个基于 [antd](https://ant.design/index-cn) 的 React 组件， 可以编辑表格的内容并实时保存。
 
+[![NPM version](https://img.shields.io/npm/v/antd-editable.svg?style=flat)](https://npmjs.org/package/antd-editable)
+[![NPM downloads](https://img.shields.io/npm/dm/antd-editable.svg?style=flat)](https://npmjs.org/package/antd-editable)
 
 ## 何时使用
 
@@ -84,18 +86,20 @@
     ...
 ```
 
+[更多高级用法](https://alkaids.github.io/antd-editable/)
+
 ## TODO
 
 - [x] 行列可编辑
 - [x] css in js
 - [x] tab 键切换
+- [x] 自定义表单数据校验
 - [ ] 未保存数据提示
-- [ ] 自定义表单数据校验
 - [ ] 可分页
 - [ ] 自动化测试
 - [ ] ts 重构
 
-### API
+## API
 
 同 [antd-table](https://ant.design/components/table-cn/) 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。目前仅支持受控
 

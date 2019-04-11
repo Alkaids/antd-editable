@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useMemo, useRef } from "react";
-import { Table, Form } from "antd";
-import produce from "immer";
-import computedEditColumns from "./computedEditColumns";
-import EditableWrapper from "./style/EditableWrapper";
+import React, { useState, useEffect, useMemo, useRef } from 'react';
+import { Table, Form } from 'antd';
+import produce from 'immer';
+import computedEditColumns from './computedEditColumns';
+import EditableWrapper from './style/EditableWrapper';
 
 function noop() {}
 
@@ -68,9 +68,9 @@ function Editable({
         setCurCell(nextCell);
       }
     }
-    window.addEventListener("keydown", handleTabChange);
+    window.addEventListener('keydown', handleTabChange);
     return () => {
-      window.removeEventListener("keydown", handleTabChange);
+      window.removeEventListener('keydown', handleTabChange);
     };
   });
 
@@ -80,7 +80,7 @@ function Editable({
         className="editable"
         dataSource={cacheSource}
         columns={editColumns}
-        rowClassName={() => "editable-row"}
+        rowClassName={() => 'editable-row'}
         {...resProps}
         pagination={false}
       />

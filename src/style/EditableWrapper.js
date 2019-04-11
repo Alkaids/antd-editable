@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const EditableWrapper = styled.div`
   .ant-form-item {
@@ -23,4 +23,4 @@ export const EditableWrapper = styled.div`
   }
 `;
 
-export default EditableWrapper
+export default EditableWrapper;

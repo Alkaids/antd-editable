@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Input, Form } from "antd";
+import React, { useEffect } from 'react';
+import { Input, Form } from 'antd';
 
 const Item = Form.Item;
 
@@ -10,7 +10,8 @@ function Cell(props) {
     rowIndex,
     curCell,
     onSetCurCell,
-    initialValue
+    initialValue,
+    rules = []
   } = props;
 
   const isEditing =
@@ -33,13 +34,18 @@ function Cell(props) {
   function handleSave() {
     onSetCurCell(null);
   }
-  const stockCell = <div onClick={handleSetCurCell} className="editable-cell-value-wrap">{initialValue}</div>;
+  const stockCell = (
+    <div onClick={handleSetCurCell} className="editable-cell-value-wrap">
+      {initialValue}
+    </div>
+  );
 
   return (
-    <div style={{ textAlign: "left" }}>
+    <div style={{ textAlign: 'left' }}>
       <Item>
         {form.getFieldDecorator(`${dataIndex}-${rowIndex}`, {
-          initialValue: initialValue === "--" ? "" : initialValue
+          initialValue: initialValue === '--' ? '' : initialValue,
+          rules
         })(
           isEditing ? (
             <Input

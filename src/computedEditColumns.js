@@ -1,11 +1,11 @@
-import React from "react";
-import Cell from "./Cell";
+import React from 'react';
+import Cell from './Cell';
 // 给空数据一个占位符
 function hasData(data) {
-  if (data != null && data !== "") {
+  if (data != null && data !== '') {
     return data;
   } else {
-    return "--";
+    return '--';
   }
 }
 export default (columns, curCell, setCurCell, form) => {
@@ -23,7 +23,6 @@ export default (columns, curCell, setCurCell, form) => {
           render,
           dataIndex,
           editable = true,
-          validator,
           rules,
           children,
           ...res
@@ -48,7 +47,8 @@ export default (columns, curCell, setCurCell, form) => {
                 rowIndex,
                 curCell,
                 onSetCurCell: setCurCell,
-                initialValue
+                initialValue,
+                rules
               };
               return <Cell {...cellprops} />;
             } else {

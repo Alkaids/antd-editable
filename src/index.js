@@ -1,3 +1,3 @@
-import Editable from "./Editable";
+import Editable from './Editable';
 
 export default Editable;
