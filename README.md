@@ -88,16 +88,16 @@
 
 [更多高级用法](https://alkaids.github.io/antd-editable/)
 
-## TODO
+## Features
 
 - [x] 行列可编辑
 - [x] css in js
 - [x] tab 键切换
 - [x] 自定义表单数据校验
+- [x] typescript 重构
 - [ ] 未保存数据提示
 - [ ] 可分页
 - [ ] 自动化测试
-- [ ] ts 重构
 
 ## API
 
