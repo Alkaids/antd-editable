@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - antd-editable@1.3.0</title>
+  <title>simple.js - example - antd-editable@2.3.0</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,7 +263,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>antd-editable@1.3.0</h1>
+      <h1>antd-editable@2.3.0</h1>
 
       <p></p>
     </div>
@@ -271,7 +271,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 
     <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;
-<span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">"../src/index"</span>;
+<span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">"../src"</span>;
 
 <span class="hljs-keyword">const</span> warraperStyle = {
   width: <span class="hljs-number">600</span>,
@@ -333,7 +333,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
         <span class="hljs-attribute">dataSource</span>=<span class="hljs-value">{dataSource}</span>
         <span class="hljs-attribute">columns</span>=<span class="hljs-value">{columns}</span>
         <span class="hljs-attribute">bordered</span>
-        <span class="hljs-attribute">onChange</span>=<span class="hljs-value">{handleTableChange}</span>
+        <span class="hljs-attribute">onCellChange</span>=<span class="hljs-value">{handleTableChange}</span>
       /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
   )</span>;

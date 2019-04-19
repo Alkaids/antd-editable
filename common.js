@@ -74520,10 +74520,10 @@ module.exports = function(module) {
 
 /***/ }),
 
-/***/ "./src/Cell.js":
-/*!*********************!*\
-  !*** ./src/Cell.js ***!
-  \*********************/
+/***/ "./src/Cell.tsx":
+/*!**********************!*\
+  !*** ./src/Cell.tsx ***!
+  \**********************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74555,7 +74555,7 @@ function Cell(props) {
   var inputRef = react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef();
   Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
     if (isEditing) {
-      inputRef.current.focus();
+      inputRef.current && inputRef.current.focus();
     }
   });
 
@@ -74596,24 +74596,24 @@ function Cell(props) {
 
 /***/ }),
 
-/***/ "./src/Editable.js":
-/*!*************************!*\
-  !*** ./src/Editable.js ***!
-  \*************************/
+/***/ "./src/Editable.tsx":
+/*!**************************!*\
+  !*** ./src/Editable.tsx ***!
+  \**************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
-/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var antd_es_table_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/table/style/css */ "./node_modules/antd/es/table/style/css.js");
-/* harmony import */ var antd_es_table__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/table */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd_es_table_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/es/table/style/css */ "./node_modules/antd/es/table/style/css.js");
+/* harmony import */ var antd_es_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/es/table */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
+/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! immer */ "./node_modules/immer/dist/immer.module.js");
-/* harmony import */ var _computedEditColumns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./computedEditColumns */ "./src/computedEditColumns.js");
-/* harmony import */ var _style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/EditableWrapper */ "./src/style/EditableWrapper.js");
+/* harmony import */ var _computedEditColumns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./computedEditColumns */ "./src/computedEditColumns.tsx");
+/* harmony import */ var _style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/EditableWrapper */ "./src/style/EditableWrapper.ts");
 
 
 
@@ -74629,9 +74629,18 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
 
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
+
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
 
 
 
@@ -74640,17 +74649,15 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 function noop() {}
 
-function Editable() {
-  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-  var _ref$dataSource = _ref.dataSource,
-      dataSource = _ref$dataSource === void 0 ? [] : _ref$dataSource,
-      _ref$columns = _ref.columns,
-      columns = _ref$columns === void 0 ? [] : _ref$columns,
-      _ref$onChange = _ref.onChange,
-      onChange = _ref$onChange === void 0 ? noop : _ref$onChange,
-      form = _ref.form,
-      resProps = _objectWithoutProperties(_ref, ["dataSource", "columns", "onChange", "form"]);
+var Editable = antd_es_form__WEBPACK_IMPORTED_MODULE_3__["default"].create()(function (_a) {
+  var _a$dataSource = _a.dataSource,
+      dataSource = _a$dataSource === void 0 ? [] : _a$dataSource,
+      _a$columns = _a.columns,
+      columns = _a$columns === void 0 ? [] : _a$columns,
+      _a$onCellChange = _a.onCellChange,
+      onCellChange = _a$onCellChange === void 0 ? noop : _a$onCellChange,
+      form = _a.form,
+      resProps = __rest(_a, ["dataSource", "columns", "onCellChange", "form"]);
 
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(null),
       _useState2 = _slicedToArray(_useState, 2),
@@ -74672,15 +74679,19 @@ function Editable() {
 
   Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
     if (beforeCell.current) {
-      var _beforeCell$current = beforeCell.current,
-          dataIndex = _beforeCell$current.dataIndex,
-          rowIndex = _beforeCell$current.rowIndex;
+      var _ref = beforeCell.current || {
+        dataIndex: '',
+        rowIndex: 0
+      },
+          dataIndex = _ref.dataIndex,
+          rowIndex = _ref.rowIndex;
+
       var value = form.getFieldValue("".concat(dataIndex, "-").concat(rowIndex));
       var nextSource = Object(immer__WEBPACK_IMPORTED_MODULE_5__["default"])(cacheSource, function (draft) {
         draft[rowIndex][dataIndex] = value;
       });
       setCacheSource(nextSource);
-      onChange(nextSource);
+      onCellChange(nextSource);
     }
 
     beforeCell.current = curCell;
@@ -74703,8 +74714,14 @@ function Editable() {
     function handleTabChange(e) {
       if (e.keyCode === 9 && curCell !== null) {
         e.preventDefault();
-        var rowIndex = curCell.rowIndex,
-            dataIndex = curCell.dataIndex;
+
+        var _ref2 = curCell || {
+          dataIndex: '',
+          rowIndex: 0
+        },
+            rowIndex = _ref2.rowIndex,
+            dataIndex = _ref2.dataIndex;
+
         var index = dataIndexMap.indexOf(dataIndex);
         var changeRow = index === dataIndexMap.length - 1;
         var nextRow = getNextRowIndex(rowIndex);
@@ -74729,7 +74746,7 @@ function Editable() {
       window.removeEventListener('keydown', handleTabChange);
     };
   });
-  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
     className: "editable",
     dataSource: cacheSource,
     columns: editColumns,
@@ -74739,16 +74756,16 @@ function Editable() {
   }, resProps, {
     pagination: false
   })));
-}
+});
 
-/* harmony default export */ __webpack_exports__["default"] = (antd_es_form__WEBPACK_IMPORTED_MODULE_1__["default"].create()(Editable));
+/* harmony default export */ __webpack_exports__["default"] = (Editable);
 
 /***/ }),
 
-/***/ "./src/computedEditColumns.js":
-/*!************************************!*\
-  !*** ./src/computedEditColumns.js ***!
-  \************************************/
+/***/ "./src/computedEditColumns.tsx":
+/*!*************************************!*\
+  !*** ./src/computedEditColumns.tsx ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -74756,20 +74773,27 @@ function Editable() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Cell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cell */ "./src/Cell.js");
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+/* harmony import */ var _Cell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cell */ "./src/Cell.tsx");
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+var __rest = undefined && undefined.__rest || function (s, e) {
+  var t = {};
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+  for (var p in s) {
+    if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0) t[p] = s[p];
+  }
 
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+  if (s != null && typeof Object.getOwnPropertySymbols === "function") for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+    if (e.indexOf(p[i]) < 0) t[p[i]] = s[p[i]];
+  }
+  return t;
+};
 
 
  // 给空数据一个占位符
 
 function hasData(data) {
-  if (data != null && data !== '') {
+  if (data != null || data !== '') {
     return data;
   } else {
     return '--';
@@ -74783,9 +74807,9 @@ function hasData(data) {
     return columns.map(function (item) {
       if (item.children) {
         var children = item.children,
-            resCol = _objectWithoutProperties(item, ["children"]);
+            resCol = __rest(item, ["children"]);
 
-        return _objectSpread({}, resCol, {
+        return _extends({}, resCol, {
           children: loopColumns(children)
         });
       } else {
@@ -74795,13 +74819,13 @@ function hasData(data) {
             editable = _item$editable === void 0 ? true : _item$editable,
             rules = item.rules,
             _children = item.children,
-            res = _objectWithoutProperties(item, ["render", "dataIndex", "editable", "rules", "children"]);
+            res = __rest(item, ["render", "dataIndex", "editable", "rules", "children"]);
 
         if (editable) {
           dataIndexMap.push(dataIndex);
         }
 
-        var resItem = _objectSpread({
+        var resItem = _extends({
           dataIndex: dataIndex
         }, res, {
           render: function render(text, record, rowIndex) {
@@ -74821,9 +74845,9 @@ function hasData(data) {
                 initialValue: initialValue,
                 rules: rules
               };
-              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], cellprops);
+              return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, cellprops));
             } else {
-              return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+              return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
                 className: "editable-cell-uneditable"
               }, initialValue);
             }
@@ -74843,24 +74867,29 @@ function hasData(data) {
 
 /***/ }),
 
-/***/ "./src/index.js":
+/***/ "./src/index.ts":
 /*!**********************!*\
-  !*** ./src/index.js ***!
+  !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: default */
+/*! exports provided: EditableColumn, EditableProps, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Editable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editable */ "./src/Editable.js");
+/* harmony import */ var _Editable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editable */ "./src/Editable.tsx");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditableColumn", function() { return _Editable__WEBPACK_IMPORTED_MODULE_0__["EditableColumn"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditableProps", function() { return _Editable__WEBPACK_IMPORTED_MODULE_0__["EditableProps"]; });
+
+
 
 /* harmony default export */ __webpack_exports__["default"] = (_Editable__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
 /***/ }),
 
-/***/ "./src/style/EditableWrapper.js":
+/***/ "./src/style/EditableWrapper.ts":
 /*!**************************************!*\
-  !*** ./src/style/EditableWrapper.js ***!
+  !*** ./src/style/EditableWrapper.ts ***!
   \**************************************/
 /*! exports provided: EditableWrapper, default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
