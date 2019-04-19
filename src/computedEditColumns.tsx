@@ -1,17 +1,23 @@
-import React from 'react';
+import * as React from 'react';
 import Cell from './Cell';
+import { EditableColumn, CellType } from './Editable';
 // 给空数据一个占位符
-function hasData(data) {
-  if (data != null && data !== '') {
+function hasData<T>(data: T): T | string {
+  if (data != null || data !== '') {
     return data;
   } else {
     return '--';
   }
 }
-export default (columns, curCell, setCurCell, form) => {
-  const dataIndexMap = [];
-  const loopColumns = columns => {
-    return columns.map(item => {
+export default <T extends object>(
+  columns: EditableColumn<T>[],
+  curCell: CellType,
+  setCurCell: any,
+  form: any
+) => {
+  const dataIndexMap: Array<string> = [];
+  const loopColumns = (columns: EditableColumn<T>[]): T[] => {
+    return columns.map((item: any) => {
       if (item.children) {
         const { children, ...resCol } = item;
         return {
@@ -33,7 +39,7 @@ export default (columns, curCell, setCurCell, form) => {
         const resItem = {
           dataIndex,
           ...res,
-          render: (text, record, rowIndex) => {
+          render: (text: string, record: any, rowIndex: number) => {
             // 注意valid字段来自dataSource（通常由后端控制），用于控制行是否可编辑
             const { editable: rowEditbale = true } = record;
             const initialValue = hasData(

@@ -1,9 +1,20 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, RefObject } from 'react';
 import { Input, Form } from 'antd';
-
+import { CellType } from './Editable';
+import { ValidationRule } from 'antd/lib/form';
 const Item = Form.Item;
 
-function Cell(props) {
+interface CellProps {
+  form: any;
+  dataIndex: string;
+  rowIndex: number | boolean;
+  curCell: CellType;
+  onSetCurCell: (curCell: CellType) => void;
+  initialValue: any;
+  rules: ValidationRule[];
+}
+
+function Cell(props: CellProps) {
   const {
     form,
     dataIndex,
@@ -17,11 +28,11 @@ function Cell(props) {
   const isEditing =
     curCell && curCell.dataIndex === dataIndex && curCell.rowIndex === rowIndex;
 
-  const inputRef = React.createRef();
+  const inputRef: RefObject<Input> = React.createRef();
 
   useEffect(() => {
     if (isEditing) {
-      inputRef.current.focus();
+      inputRef.current && inputRef.current.focus();
     }
   });
 
@@ -32,7 +43,7 @@ function Cell(props) {
     });
   }
   function handleSave() {
-    form.validateFields([`${dataIndex}-${rowIndex}`], err => {
+    form.validateFields([`${dataIndex}-${rowIndex}`], (err: object) => {
       if (!err) {
         onSetCurCell(null);
       }

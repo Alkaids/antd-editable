@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Editable from "../src/index";
+import Editable from "../src";
 
 const warraperStyle = {
   width: 600,
@@ -62,7 +62,7 @@ function App() {
         dataSource={dataSource}
         columns={columns}
         bordered
-        onChange={handleTableChange}
+        onCellChange={handleTableChange}
       />
     </div>
   );

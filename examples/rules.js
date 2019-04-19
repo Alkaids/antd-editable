@@ -74,7 +74,7 @@ function App() {
         dataSource={dataSource}
         columns={columns}
         bordered
-        onChange={handleTableChange}
+        onCellChange={handleTableChange}
       />
     </div>
   );
