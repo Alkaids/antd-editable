@@ -1,114 +1,70 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
-import { Table, Form } from 'antd';
-import produce from 'immer';
-import computedEditColumns from './computedEditColumns';
-import EditableWrapper from './style/EditableWrapper';
+import React, { FC } from 'react';
+import { Table, Form, Button } from 'antd';
 import { TableProps, ColumnProps } from 'antd/lib/table';
 import { ValidationRule, FormComponentProps } from 'antd/lib/form';
+import { ButtonProps } from 'antd/lib/button';
+
+import useProps from './useProps';
+import EditableWrapper from './style/EditableWrapper';
 
 export interface EditableColumn<T> extends ColumnProps<T> {
-  editable?: boolean;
-  rule?: ValidationRule[];
+    /** 列的是否可编辑 */
+    editable?: boolean;
+    /** 列数据的校验规则 ref: https://ant.design/components/form-cn/#%E6%A0%A1%E9%AA%8C%E8%A7%84%E5%88%99 */
+    rule?: ValidationRule[];
 }
 
 export interface EditableProps<T> extends TableProps<T> {
-  columns?: EditableColumn<T>[];
-  onCellChange?: (nextSource:T[]) => void;
+    /** 表格列的配置描述， 用过 antd Table 的都懂 */
+    columns?: EditableColumn<T>[];
+    /** 单元格更新回调 */
+    onCellChange?: (nextSource: T[]) => void;
+    /** 保存按钮回调，如传入此属性，则会在表格下方多出一个button */
+    onSubmit?: (nextSource: T[]) => void;
+    /** 保存按钮的props, 与onSubmit联用, 可用 text 属性设置按钮文字*/
+    btnProps: { text?: string } & ButtonProps;
 }
-
-interface CellInterFace {
-  dataIndex: string;
-  rowIndex: number|boolean;
-}
-
-export type CellType = CellInterFace | null
 
 type WrappProps = FormComponentProps & EditableProps<any>;
 
 function noop() {}
 
-const Editable = Form.create()(
-  ({
+const btnDefaultProps = { text: '保存', style: { marginTop: 10 } };
+
+const Editable: FC<WrappProps> = ({
     dataSource = [],
     columns = [],
-    onCellChange = noop,
     form,
+    btnProps = btnDefaultProps,
+    onCellChange = noop,
+    onSubmit = noop,
     ...resProps
-  }: WrappProps) => {
-    const [curCell, setCurCell] = useState(null);
-    const [cacheSource, setCacheSource] = useState(dataSource);
-    const beforeCell = useRef(null);
-    const { editColumns, dataIndexMap } = useMemo(
-      () => computedEditColumns(columns, curCell, setCurCell, form),
-      [columns, curCell]
-    );
+}) => {
+    const { cacheSource, editColumns } = useProps(dataSource, columns, onCellChange, form);
 
-    useEffect(() => {
-      if (beforeCell.current) {
-        const { dataIndex, rowIndex } = beforeCell.current || {dataIndex:'',rowIndex:0};
-        const value = form.getFieldValue(`${dataIndex}-${rowIndex}`);
-        const nextSource = produce(cacheSource, draft => {
-          draft[rowIndex][dataIndex] = value;
-        });
-        setCacheSource(nextSource);
-        onCellChange(nextSource);
-      }
-      beforeCell.current = curCell;
-    }, [curCell]);
+    const { text: btnText, ...restBtnProps } = btnProps;
 
-    // tab 切换
-    useEffect(() => {
-      function getNextRowIndex(preRowIndex:number):number|boolean {
-        let length = cacheSource.length;
-        let i = preRowIndex + 1;
-        for (; i < length; i++) {
-          if (cacheSource[i].editable !== false) {
-            return i;
-          }
-        }
-        return false;
-      }
-      function handleTabChange(e:KeyboardEvent) {
-        if (e.keyCode === 9 && curCell !== null) {
-          e.preventDefault();
-          const { rowIndex, dataIndex } = curCell|| {dataIndex:'',rowIndex:0};
-          const index = dataIndexMap.indexOf(dataIndex);
-          const changeRow = index === dataIndexMap.length - 1;
-          const nextRow = getNextRowIndex(rowIndex);
-          const canChangeRow =
-            cacheSource.length - 1 >= rowIndex + 1 && !!nextRow;
-
-          let nextCell:any;
-          if (changeRow && !canChangeRow) {
-            nextCell = null;
-          } else {
-            nextCell = {
-              rowIndex: changeRow ? nextRow : rowIndex,
-              dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1]
-            };
-          }
-          setCurCell(nextCell);
-        }
-      }
-      window.addEventListener('keydown', handleTabChange);
-      return () => {
-        window.removeEventListener('keydown', handleTabChange);
-      };
-    });
+    function handleSubmit() {
+        onSubmit(cacheSource);
+    }
 
     return (
-      <EditableWrapper>
-        <Table
-          className="editable"
-          dataSource={cacheSource}
-          columns={editColumns}
-          rowClassName={() => 'editable-row'}
-          {...resProps}
-          pagination={false}
-        />
-      </EditableWrapper>
+        <EditableWrapper>
+            <Table
+                className="editable"
+                dataSource={cacheSource}
+                columns={editColumns}
+                rowClassName={() => 'editable-row'}
+                {...resProps}
+                pagination={false}
+            />
+            {onSubmit && (
+                <Button onClick={handleSubmit} {...restBtnProps}>
+                    {btnText}
+                </Button>
+            )}
+        </EditableWrapper>
     );
-  }
-);
+};
 
-export default Editable;
+export default Form.create()(Editable);

@@ -72,36 +72,36 @@
         }
     ];
 
-    function handleTableChange(nextSource){
+    function handleCellChange(nextSource){
         console.log(nextSource);
     }
 
     <Editable
         dataSource={dataSource}
         columns={columns}
-        onCellChange={handleTableChange}
+        onCellChange={handleCellChange}
         bordered
     />
 
     ...
 ```
 
-[更多高级用法](https://alkaids.github.io/antd-editable/)
+[更多用法](https://alkaids.github.io/antd-editable/)
 
 ## Features
 
-- [x] 行列可编辑
-- [x] css in js
-- [x] tab 键切换
-- [x] 自定义表单数据校验
-- [x] typescript 重构
-- [ ] 未保存数据提示
-- [ ] 可分页
-- [ ] 自动化测试
+-   [x] 行列可编辑
+-   [x] css in js
+-   [x] tab 键切换
+-   [x] 自定义表单数据校验
+-   [x] typescript 重构
+-   [ ] 未保存数据提示
+-   [ ] 可分页
+-   [ ] 自动化测试
 
 ## API
 
-同 [antd-table](https://ant.design/components/table-cn/) 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。目前仅支持受控
+同 [antd-table](https://ant.design/components/table-cn/) 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。
 
 <table>
     <thead>
@@ -163,6 +163,34 @@
                 -
             </td>                 
         </tr>   
+        <tr>
+            <td>
+                onSubmit
+            </td>
+            <td>
+                保存按钮回调，如传入此属性，则会在表格下方多出一个button
+            </td> 
+            <td>
+                function
+            </td>  
+            <td>
+                -
+            </td>                 
+        </tr> 
+        <tr>
+            <td>
+                btnProps
+            </td>
+            <td>
+                保存按钮的props, 与onSubmit联用, 可用 text 属性设置按钮文字
+            </td> 
+            <td>
+                object
+            </td>  
+            <td>
+                { text: '保存', style: { marginTop: 10 } }
+            </td>                 
+        </tr>         
         <tr>
             <td>
                 -

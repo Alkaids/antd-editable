@@ -30,8 +30,7 @@
     "gh-pages": "rc-tools run gh-pages",
     "start": "rc-tools run server",
     "pub": "rc-tools run pub --babel-runtime",
-    "lint": "rc-tools run lint",
-    "lint:fix": "rc-tools run lint --fix",
+    "tslint": "tslint --project . src/**/*.ts src/**/*.tsx",
     "test": "jest",
     "prepublish": "rc-tools run guard",
     "coverage": "jest --coverage"
@@ -49,7 +48,8 @@
     "babel-plugin-import": "^1.11.0",
     "immer": "^2.1.4",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "tslint": "^5.16.0"
   },
   "babel": {
     "plugins": [

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import ReactDOM from 'react-dom';
 import Editable from '../src/index';
 
@@ -7,7 +7,7 @@ const warraperStyle = {
     margin: '50px auto'
 };
 
-const dataSource = [
+const mockDataSource = [
     {
         key: '1',
         name: '金鑫',
@@ -62,18 +62,30 @@ const columns = [
     }
 ];
 
-function handleCellChange(nextSource) {
-    console.log(nextSource);
-}
-
 function App() {
+    const [dataSource, setDataSource] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+        setLoading(true);
+        setTimeout(() => {
+            setDataSource(mockDataSource);
+            setLoading(false);
+        }, 3000);
+    }, []);
+
+    function handleCellChange(nextSource){
+        setDataSource(nextSource);
+    }
+
     return (
         <div style={warraperStyle}>
-            <h3>列数据校验</h3>
+            <h3>异步数据加载(延迟3s)</h3>
             <Editable
+                bordered
                 dataSource={dataSource}
                 columns={columns}
-                bordered
+                loading={loading}
                 onCellChange={handleCellChange}
             />
         </div>
