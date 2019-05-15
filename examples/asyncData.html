@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>rules.js - example - antd-editable@2.4.1</title>
+  <title>asyncData.js - example - antd-editable@2.4.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -269,7 +269,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React, { useState, useEffect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
 <span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">'../src/index'</span>;
 
@@ -278,7 +278,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   margin: <span class="hljs-string">'50px auto'</span>,
 };
 
-<span class="hljs-keyword">const</span> dataSource = [
+<span class="hljs-keyword">const</span> mockDataSource = [
   {
     key: <span class="hljs-string">'1'</span>,
     name: <span class="hljs-string">'金鑫'</span>,
@@ -333,18 +333,30 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   },
 ];
 
-<span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleCellChange</span>(<span class="hljs-params">nextSource</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(nextSource);
-}
-
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
+  <span class="hljs-keyword">const</span> [dataSource, setDataSource] = useState([]);
+  <span class="hljs-keyword">const</span> [loading, setLoading] = useState(<span class="hljs-literal">false</span>);
+
+  useEffect(() =&gt; {
+    setLoading(<span class="hljs-literal">true</span>);
+    setTimeout(() =&gt; {
+      setDataSource(mockDataSource);
+      setLoading(<span class="hljs-literal">false</span>);
+    }, <span class="hljs-number">3000</span>);
+  }, []);
+
+  <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleCellChange</span>(<span class="hljs-params">nextSource</span>) </span>{
+    setDataSource(nextSource);
+  }
+
   <span class="hljs-keyword">return</span> (
     <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">style</span>=<span class="hljs-value">{warraperStyle}</span>&gt;</span>
-      <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>列数据校验<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>异步数据加载(延迟3s)<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
       <span class="hljs-tag">&lt;<span class="hljs-title">Editable</span>
+        <span class="hljs-attribute">bordered</span>
         <span class="hljs-attribute">dataSource</span>=<span class="hljs-value">{dataSource}</span>
         <span class="hljs-attribute">columns</span>=<span class="hljs-value">{columns}</span>
-        <span class="hljs-attribute">bordered</span>
+        <span class="hljs-attribute">loading</span>=<span class="hljs-value">{loading}</span>
         <span class="hljs-attribute">onCellChange</span>=<span class="hljs-value">{handleCellChange}</span>
       /&gt;</span>
     <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
@@ -362,7 +374,7 @@ ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-t
   </a>
   <script>FastClick.attach(document.body);</script>
   <script src="../common.js?nowrap"></script>
-  <script src="rules.js?nowrap"></script>
+  <script src="asyncData.js?nowrap"></script>
 </body>
 
 </html>

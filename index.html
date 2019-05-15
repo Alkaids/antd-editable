@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>antd-editable@2.3.0 - </title>
+  <title>antd-editable@2.4.1 - </title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,16 +737,20 @@
 
 <body>
 <div class="header">
-  <h1>antd-editable@2.3.0</h1>
+  <h1>antd-editable@2.4.1</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
   <div class="examples-body">
     <ul>
       
+      <li><a href="examples/asyncData.html">asyncData</a></li>
+      
       <li><a href="examples/rules.html">rules</a></li>
       
       <li><a href="examples/simple.html">simple</a></li>
+      
+      <li><a href="examples/submit.html">submit</a></li>
       
     </ul>
   </div>
@@ -806,18 +810,18 @@
         }
     ];
 
-    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleTableChange</span>(<span class="hljs-params">nextSource</span>)</span>{
+    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleCellChange</span>(<span class="hljs-params">nextSource</span>)</span>{
         <span class="hljs-built_in">console</span>.log(nextSource);
     }
 
     &lt;Editable
         dataSource={dataSource}
         columns={columns}
-        onCellChange={handleTableChange}
+        onCellChange={handleCellChange}
         bordered
     /&gt;
 
-    ...</code></pre></div><p><a href="https://alkaids.github.io/antd-editable/" title="null">更多高级用法</a></p>
+    ...</code></pre></div><p><a href="https://alkaids.github.io/antd-editable/" title="null">更多用法</a></p>
 <h2>Features<a id="user-content-features" name="features" class="anchor" aria-hidden="true" href="#features"><span class="octicon octicon-link"></span></a></h2><ul>
 <li>[x] 行列可编辑</li>
 <li>[x] css in js</li>
@@ -828,7 +832,7 @@
 <li>[ ] 可分页</li>
 <li>[ ] 自动化测试</li>
 </ul>
-<h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><p>同 <a href="https://ant.design/components/table-cn/" title="null">antd-table</a> 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。目前仅支持受控</p>
+<h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><p>同 <a href="https://ant.design/components/table-cn/" title="null">antd-table</a> 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。</p>
 <table>
     <thead>
         <tr>
@@ -879,6 +883,29 @@
                 function
             </td><br>            <td>
                 -
+            </td><br>        </tr><br>        <tr>
+            <td>
+                onSubmit
+            </td>
+            <td>
+                保存按钮回调，如传入此属性，则会在表格下方多出一个button
+            </td> 
+            <td>
+                function
+            </td><br>            <td>
+                -
+            </td><br>        </tr> 
+        <tr>
+            <td>
+                btnProps
+            </td>
+            <td>
+                保存按钮的props, 与onSubmit联用, 可用 text 属性设置按钮文字
+            </td> 
+            <td>
+                object
+            </td><br>            <td>
+                { text: &#39;保存&#39;, style: { marginTop: 10 } }
             </td><br>        </tr><br>        <tr>
             <td>
                 -

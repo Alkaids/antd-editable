@@ -56,7 +56,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/simple": 0
+/******/ 		"examples/asyncData": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -147,17 +147,17 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([2,"common"]);
+/******/ 	deferredModules.push([0,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/simple.js":
-/*!****************************!*\
-  !*** ./examples/simple.js ***!
-  \****************************/
+/***/ "./examples/asyncData.js":
+/*!*******************************!*\
+  !*** ./examples/asyncData.js ***!
+  \*******************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -167,7 +167,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "./node_modules/react-dom/index.js");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _src__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src */ "./src/index.ts");
+/* harmony import */ var _src_index__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../src/index */ "./src/index.ts");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -175,7 +183,7 @@ var warraperStyle = {
   width: 600,
   margin: '50px auto'
 };
-var dataSource = [{
+var mockDataSource = [{
   key: '1',
   name: '金鑫',
   age: 16,
@@ -196,12 +204,20 @@ var columns = [{
   title: '姓名',
   dataIndex: 'name',
   key: 'name',
-  width: '30%'
+  width: '30%',
+  rules: [{
+    required: true,
+    message: '请填写姓名'
+  }]
 }, {
   title: '年龄',
   dataIndex: 'age',
   key: 'age',
-  width: '30%'
+  width: '30%',
+  rules: [{
+    pattern: /^\d{1,3}$/,
+    message: '请输入正确的年龄'
+  }]
 }, {
   title: '住址',
   dataIndex: 'address',
@@ -209,18 +225,37 @@ var columns = [{
   editable: false
 }];
 
-function handleTableChange(nextSource) {
-  console.log(nextSource);
-}
-
 function App() {
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]),
+      _useState2 = _slicedToArray(_useState, 2),
+      dataSource = _useState2[0],
+      setDataSource = _useState2[1];
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      loading = _useState4[0],
+      setLoading = _useState4[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setLoading(true);
+    setTimeout(function () {
+      setDataSource(mockDataSource);
+      setLoading(false);
+    }, 3000);
+  }, []);
+
+  function handleCellChange(nextSource) {
+    setDataSource(nextSource);
+  }
+
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: warraperStyle
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "antd-editable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u5F02\u6B65\u6570\u636E\u52A0\u8F7D(\u5EF6\u8FDF3s)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    bordered: true,
     dataSource: dataSource,
     columns: columns,
-    bordered: true,
-    onCellChange: handleTableChange
+    loading: loading,
+    onCellChange: handleCellChange
   }));
 }
 
@@ -228,17 +263,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 2:
-/*!**********************************!*\
-  !*** multi ./examples/simple.js ***!
-  \**********************************/
+/***/ 0:
+/*!*************************************!*\
+  !*** multi ./examples/asyncData.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/simple.js */"./examples/simple.js");
+module.exports = __webpack_require__(/*! ./examples/asyncData.js */"./examples/asyncData.js");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=simple.js.map
+//# sourceMappingURL=asyncData.js.map

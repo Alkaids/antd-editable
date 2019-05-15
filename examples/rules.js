@@ -147,7 +147,7 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([0,"common"]);
+/******/ 	deferredModules.push([1,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
@@ -173,70 +173,70 @@ __webpack_require__.r(__webpack_exports__);
 
 var warraperStyle = {
   width: 600,
-  margin: "50px auto"
+  margin: '50px auto'
 };
 var dataSource = [{
-  key: "1",
-  name: "金鑫",
+  key: '1',
+  name: '金鑫',
   age: 16,
-  address: "慕和兰道304"
+  address: '慕和兰道304'
 }, {
-  key: "2",
-  name: "张海新",
+  key: '2',
+  name: '张海新',
   age: 17,
-  address: "慕和兰道304",
+  address: '慕和兰道304',
   editable: false
 }, {
-  key: "3",
-  name: "李鳌",
+  key: '3',
+  name: '李鳌',
   age: 15,
-  address: "慕和兰道304"
+  address: '慕和兰道304'
 }];
 var columns = [{
-  title: "姓名",
-  dataIndex: "name",
-  key: "name",
-  width: "30%",
+  title: '姓名',
+  dataIndex: 'name',
+  key: 'name',
+  width: '30%',
   rules: [{
     required: true,
     message: '请填写姓名'
   }]
 }, {
-  title: "年龄",
-  dataIndex: "age",
-  key: "age",
-  width: "30%",
+  title: '年龄',
+  dataIndex: 'age',
+  key: 'age',
+  width: '30%',
   rules: [{
     pattern: /^\d{1,3}$/,
     message: '请输入正确的年龄'
   }]
 }, {
-  title: "住址",
-  dataIndex: "address",
-  key: "address",
+  title: '住址',
+  dataIndex: 'address',
+  key: 'address',
   editable: false
 }];
 
-function handleTableChange(nextSource) {
+function handleCellChange(nextSource) {
   console.log(nextSource);
 }
 
 function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: warraperStyle
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "antd-editable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u5217\u6570\u636E\u6821\u9A8C"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src_index__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataSource: dataSource,
     columns: columns,
     bordered: true,
-    onCellChange: handleTableChange
+    onCellChange: handleCellChange
   }));
 }
 
-react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById("__react-content"));
+react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null), document.getElementById('__react-content'));
 
 /***/ }),
 
-/***/ 0:
+/***/ 1:
 /*!*********************************!*\
   !*** multi ./examples/rules.js ***!
   \*********************************/

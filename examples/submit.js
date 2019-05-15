@@ -56,7 +56,7 @@
 /******/ 	// undefined = chunk not loaded, null = chunk preloaded/prefetched
 /******/ 	// Promise = chunk loading, 0 = chunk loaded
 /******/ 	var installedChunks = {
-/******/ 		"examples/simple": 0
+/******/ 		"examples/submit": 0
 /******/ 	};
 /******/
 /******/ 	var deferredModules = [];
@@ -147,16 +147,16 @@
 /******/
 /******/
 /******/ 	// add entry module to deferred list
-/******/ 	deferredModules.push([2,"common"]);
+/******/ 	deferredModules.push([3,"common"]);
 /******/ 	// run deferred modules when ready
 /******/ 	return checkDeferredModules();
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./examples/simple.js":
+/***/ "./examples/submit.js":
 /*!****************************!*\
-  !*** ./examples/simple.js ***!
+  !*** ./examples/submit.js ***!
   \****************************/
 /*! no exports provided */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -209,18 +209,18 @@ var columns = [{
   editable: false
 }];
 
-function handleTableChange(nextSource) {
+function handleSubmit(nextSource) {
   console.log(nextSource);
 }
 
 function App() {
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
     style: warraperStyle
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "antd-editable"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src__WEBPACK_IMPORTED_MODULE_2__["default"], {
+  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "\u4F7F\u7528onSubmit\u63D0\u4EA4"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_src__WEBPACK_IMPORTED_MODULE_2__["default"], {
     dataSource: dataSource,
     columns: columns,
     bordered: true,
-    onCellChange: handleTableChange
+    onSubmit: handleSubmit
   }));
 }
 
@@ -228,17 +228,17 @@ react_dom__WEBPACK_IMPORTED_MODULE_1___default.a.render(react__WEBPACK_IMPORTED_
 
 /***/ }),
 
-/***/ 2:
+/***/ 3:
 /*!**********************************!*\
-  !*** multi ./examples/simple.js ***!
+  !*** multi ./examples/submit.js ***!
   \**********************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./examples/simple.js */"./examples/simple.js");
+module.exports = __webpack_require__(/*! ./examples/submit.js */"./examples/submit.js");
 
 
 /***/ })
 
 /******/ });
-//# sourceMappingURL=simple.js.map
+//# sourceMappingURL=submit.js.map

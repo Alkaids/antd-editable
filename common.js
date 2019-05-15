@@ -74542,29 +74542,27 @@ __webpack_require__.r(__webpack_exports__);
 
 var Item = antd_es_form__WEBPACK_IMPORTED_MODULE_3__["default"].Item;
 
-function Cell(props) {
-  var form = props.form,
-      dataIndex = props.dataIndex,
-      rowIndex = props.rowIndex,
-      curCell = props.curCell,
-      onSetCurCell = props.onSetCurCell,
-      initialValue = props.initialValue,
-      _props$rules = props.rules,
-      rules = _props$rules === void 0 ? [] : _props$rules;
-  var isEditing = curCell && curCell.dataIndex === dataIndex && curCell.rowIndex === rowIndex;
-  var inputRef = react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef();
-  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
-    if (isEditing) {
-      inputRef.current && inputRef.current.focus();
-    }
-  });
+var Cell = function Cell(_ref) {
+  var form = _ref.form,
+      dataIndex = _ref.dataIndex,
+      rowIndex = _ref.rowIndex,
+      curCell = _ref.curCell,
+      onSetCurCell = _ref.onSetCurCell,
+      initialValue = _ref.initialValue,
+      _ref$rules = _ref.rules,
+      rules = _ref$rules === void 0 ? [] : _ref$rules;
+  // 是否处于可编辑状态
+  var isEditing = !!curCell && curCell.dataIndex === dataIndex && curCell.rowIndex === rowIndex; // input的Ref，用于激活后的focus
+
+  var inputRef = useFocus(isEditing); // 将当前的Cell激活
 
   function handleSetCurCell() {
     onSetCurCell({
       dataIndex: dataIndex,
       rowIndex: rowIndex
     });
-  }
+  } // 保存值到表单域里
+
 
   function handleSave() {
     form.validateFields(["".concat(dataIndex, "-").concat(rowIndex)], function (err) {
@@ -74572,7 +74570,8 @@ function Cell(props) {
         onSetCurCell(null);
       }
     });
-  }
+  } // 静态值
+
 
   var stockCell = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
     onClick: handleSetCurCell,
@@ -74590,7 +74589,17 @@ function Cell(props) {
     onPressEnter: handleSave,
     onBlur: handleSave
   }) : stockCell)));
-}
+};
+
+var useFocus = function useFocus(isEditing) {
+  var inputRef = react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef();
+  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
+    if (isEditing) {
+      if (inputRef.current) inputRef.current.focus();
+    }
+  }, [isEditing]);
+  return inputRef;
+};
 
 /* harmony default export */ __webpack_exports__["default"] = (Cell);
 
@@ -74605,29 +74614,24 @@ function Cell(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var antd_es_table_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/es/table/style/css */ "./node_modules/antd/es/table/style/css.js");
-/* harmony import */ var antd_es_table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/es/table */ "./node_modules/antd/es/table/index.js");
-/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
-/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! immer */ "./node_modules/immer/dist/immer.module.js");
-/* harmony import */ var _computedEditColumns__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./computedEditColumns */ "./src/computedEditColumns.tsx");
-/* harmony import */ var _style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./style/EditableWrapper */ "./src/style/EditableWrapper.ts");
+/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
+/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var antd_es_button_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/button/style/css */ "./node_modules/antd/es/button/style/css.js");
+/* harmony import */ var antd_es_button__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/button */ "./node_modules/antd/es/button/index.js");
+/* harmony import */ var antd_es_table_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd/es/table/style/css */ "./node_modules/antd/es/table/style/css.js");
+/* harmony import */ var antd_es_table__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd/es/table */ "./node_modules/antd/es/table/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _useProps__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./useProps */ "./src/useProps.ts");
+/* harmony import */ var _style_EditableWrapper__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./style/EditableWrapper */ "./src/style/EditableWrapper.ts");
+
+
 
 
 
 
 
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 var __rest = undefined && undefined.__rest || function (s, e) {
   var t = {};
@@ -74646,107 +74650,41 @@ var __rest = undefined && undefined.__rest || function (s, e) {
 
 
 
-
 function noop() {}
 
-var Editable = antd_es_form__WEBPACK_IMPORTED_MODULE_3__["default"].create()(function (_a) {
+var btnDefaultProps = {
+  text: '保存',
+  style: {
+    marginTop: 10
+  }
+};
+
+var Editable = function Editable(_a) {
   var _a$dataSource = _a.dataSource,
       dataSource = _a$dataSource === void 0 ? [] : _a$dataSource,
       _a$columns = _a.columns,
       columns = _a$columns === void 0 ? [] : _a$columns,
+      form = _a.form,
+      _a$btnProps = _a.btnProps,
+      btnProps = _a$btnProps === void 0 ? btnDefaultProps : _a$btnProps,
       _a$onCellChange = _a.onCellChange,
       onCellChange = _a$onCellChange === void 0 ? noop : _a$onCellChange,
-      form = _a.form,
-      resProps = __rest(_a, ["dataSource", "columns", "onCellChange", "form"]);
+      _a$onSubmit = _a.onSubmit,
+      onSubmit = _a$onSubmit === void 0 ? noop : _a$onSubmit,
+      resProps = __rest(_a, ["dataSource", "columns", "form", "btnProps", "onCellChange", "onSubmit"]);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(null),
-      _useState2 = _slicedToArray(_useState, 2),
-      curCell = _useState2[0],
-      setCurCell = _useState2[1];
+  var _useProps = Object(_useProps__WEBPACK_IMPORTED_MODULE_7__["default"])(dataSource, columns, onCellChange, form),
+      cacheSource = _useProps.cacheSource,
+      editColumns = _useProps.editColumns;
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_4__["useState"])(dataSource),
-      _useState4 = _slicedToArray(_useState3, 2),
-      cacheSource = _useState4[0],
-      setCacheSource = _useState4[1];
+  var btnText = btnProps.text,
+      restBtnProps = __rest(btnProps, ["text"]);
 
-  var beforeCell = Object(react__WEBPACK_IMPORTED_MODULE_4__["useRef"])(null);
+  function handleSubmit() {
+    onSubmit(cacheSource);
+  }
 
-  var _useMemo = Object(react__WEBPACK_IMPORTED_MODULE_4__["useMemo"])(function () {
-    return Object(_computedEditColumns__WEBPACK_IMPORTED_MODULE_6__["default"])(columns, curCell, setCurCell, form);
-  }, [columns, curCell]),
-      editColumns = _useMemo.editColumns,
-      dataIndexMap = _useMemo.dataIndexMap;
-
-  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
-    if (beforeCell.current) {
-      var _ref = beforeCell.current || {
-        dataIndex: '',
-        rowIndex: 0
-      },
-          dataIndex = _ref.dataIndex,
-          rowIndex = _ref.rowIndex;
-
-      var value = form.getFieldValue("".concat(dataIndex, "-").concat(rowIndex));
-      var nextSource = Object(immer__WEBPACK_IMPORTED_MODULE_5__["default"])(cacheSource, function (draft) {
-        draft[rowIndex][dataIndex] = value;
-      });
-      setCacheSource(nextSource);
-      onCellChange(nextSource);
-    }
-
-    beforeCell.current = curCell;
-  }, [curCell]); // tab 切换
-
-  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
-    function getNextRowIndex(preRowIndex) {
-      var length = cacheSource.length;
-      var i = preRowIndex + 1;
-
-      for (; i < length; i++) {
-        if (cacheSource[i].editable !== false) {
-          return i;
-        }
-      }
-
-      return false;
-    }
-
-    function handleTabChange(e) {
-      if (e.keyCode === 9 && curCell !== null) {
-        e.preventDefault();
-
-        var _ref2 = curCell || {
-          dataIndex: '',
-          rowIndex: 0
-        },
-            rowIndex = _ref2.rowIndex,
-            dataIndex = _ref2.dataIndex;
-
-        var index = dataIndexMap.indexOf(dataIndex);
-        var changeRow = index === dataIndexMap.length - 1;
-        var nextRow = getNextRowIndex(rowIndex);
-        var canChangeRow = cacheSource.length - 1 >= rowIndex + 1 && !!nextRow;
-        var nextCell;
-
-        if (changeRow && !canChangeRow) {
-          nextCell = null;
-        } else {
-          nextCell = {
-            rowIndex: changeRow ? nextRow : rowIndex,
-            dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1]
-          };
-        }
-
-        setCurCell(nextCell);
-      }
-    }
-
-    window.addEventListener('keydown', handleTabChange);
-    return function () {
-      window.removeEventListener('keydown', handleTabChange);
-    };
-  });
-  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
     className: "editable",
     dataSource: cacheSource,
     columns: editColumns,
@@ -74755,10 +74693,12 @@ var Editable = antd_es_form__WEBPACK_IMPORTED_MODULE_3__["default"].create()(fun
     }
   }, resProps, {
     pagination: false
-  })));
-});
+  })), onSubmit && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_button__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    onClick: handleSubmit
+  }, restBtnProps), btnText));
+};
 
-/* harmony default export */ __webpack_exports__["default"] = (Editable);
+/* harmony default export */ __webpack_exports__["default"] = (antd_es_form__WEBPACK_IMPORTED_MODULE_1__["default"].create()(Editable));
 
 /***/ }),
 
@@ -74774,6 +74714,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Cell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cell */ "./src/Cell.tsx");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.ts");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var __rest = undefined && undefined.__rest || function (s, e) {
@@ -74790,21 +74731,13 @@ var __rest = undefined && undefined.__rest || function (s, e) {
 };
 
 
- // 给空数据一个占位符
 
-function hasData(data) {
-  if (data != null || data !== '') {
-    return data;
-  } else {
-    return '--';
-  }
-}
 
 /* harmony default export */ __webpack_exports__["default"] = (function (columns, curCell, setCurCell, form) {
   var dataIndexMap = [];
 
-  var loopColumns = function loopColumns(columns) {
-    return columns.map(function (item) {
+  var loopColumns = function loopColumns(lColumns) {
+    return lColumns.map(function (item) {
       if (item.children) {
         var children = item.children,
             resCol = __rest(item, ["children"]);
@@ -74829,10 +74762,10 @@ function hasData(data) {
           dataIndex: dataIndex
         }, res, {
           render: function render(text, record, rowIndex) {
-            // 注意valid字段来自dataSource（通常由后端控制），用于控制行是否可编辑
+            // 注意 editable 字段来自dataSource（通常由后端控制），用于控制行是否可编辑
             var _record$editable = record.editable,
                 rowEditbale = _record$editable === void 0 ? true : _record$editable;
-            var initialValue = hasData(_render ? _render(text, record, rowIndex) : text);
+            var initialValue = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["hasData"])(_render ? _render(text, record, rowIndex) : text);
 
             if (rowEditbale && editable) {
               var cellprops = {
@@ -74845,12 +74778,12 @@ function hasData(data) {
                 initialValue: initialValue,
                 rules: rules
               };
-              return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], _extends({}, cellprops));
-            } else {
-              return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
-                className: "editable-cell-uneditable"
-              }, initialValue);
+              return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], cellprops);
             }
+
+            return react__WEBPACK_IMPORTED_MODULE_0__["createElement"]("div", {
+              className: "editable-cell-uneditable"
+            }, initialValue);
           }
         });
 
@@ -74913,6 +74846,197 @@ function _taggedTemplateLiteral(strings, raw) { if (!raw) { raw = strings.slice(
 
 var EditableWrapper = styled_components__WEBPACK_IMPORTED_MODULE_0__["default"].div(_templateObject());
 /* harmony default export */ __webpack_exports__["default"] = (EditableWrapper);
+
+/***/ }),
+
+/***/ "./src/useProps.ts":
+/*!*************************!*\
+  !*** ./src/useProps.ts ***!
+  \*************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var immer__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! immer */ "./node_modules/immer/dist/immer.module.js");
+/* harmony import */ var _useTabChange__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./useTabChange */ "./src/useTabChange.ts");
+/* harmony import */ var _computedEditColumns__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./computedEditColumns */ "./src/computedEditColumns.tsx");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+
+
+
+
+
+var useProps = function useProps(dataSource, columns, onCellChange, form) {
+  // 当前被激活的单元格，默认为null
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      curCell = _useState2[0],
+      setCurCell = _useState2[1]; // 内部维护的 dataSource
+
+
+  var _useDataSource = useDataSource(dataSource, form),
+      cacheSource = _useDataSource.cacheSource,
+      setCacheSource = _useDataSource.setCacheSource; // 用 ref 记录每次被更新的单元格
+
+
+  var beforeCell = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // 使用 useMemo 缓存 editColumns 和 dataIndexMap。 只在 columns 和 curCell 更改后更新
+
+  var _useMemo = Object(react__WEBPACK_IMPORTED_MODULE_0__["useMemo"])(function () {
+    return Object(_computedEditColumns__WEBPACK_IMPORTED_MODULE_3__["default"])(columns, curCell, handleSetCurCell, form);
+  }, [columns, curCell]),
+      editColumns = _useMemo.editColumns,
+      dataIndexMap = _useMemo.dataIndexMap; // tab键切换
+
+
+  Object(_useTabChange__WEBPACK_IMPORTED_MODULE_2__["default"])(curCell, handleSetCurCell, cacheSource, dataIndexMap); // 每当 curCell 更变后，更改缓存的 dataSource 。 并且执行 onCellChange
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    if (beforeCell && beforeCell.current) {
+      var _beforeCell$current = beforeCell.current,
+          dataIndex = _beforeCell$current.dataIndex,
+          rowIndex = _beforeCell$current.rowIndex;
+      var value = form.getFieldValue("".concat(dataIndex, "-").concat(rowIndex));
+      var nextSource = Object(immer__WEBPACK_IMPORTED_MODULE_1__["default"])(cacheSource, function (draft) {
+        draft[rowIndex][dataIndex] = value;
+      });
+      setCacheSource(nextSource);
+      onCellChange(nextSource);
+    } // 重新设置 Ref 记录的值
+
+
+    beforeCell.current = curCell;
+  }, [curCell]);
+
+  function handleSetCurCell(nextCell) {
+    //  当前单元格有错误的话则禁止切换
+    if (!curCell || !form.getFieldError("".concat(curCell.dataIndex, "-").concat(curCell.rowIndex))) {
+      setCurCell(nextCell);
+    }
+  }
+
+  return {
+    cacheSource: cacheSource,
+    editColumns: editColumns
+  };
+};
+
+var useDataSource = function useDataSource(dataSource, form) {
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])(dataSource),
+      _useState4 = _slicedToArray(_useState3, 2),
+      cacheSource = _useState4[0],
+      setCacheSource = _useState4[1]; // 外部 dataSource 更新了同步更新缓存的 dataSource 和 表单域的值
+
+
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    setCacheSource(dataSource);
+    form.resetFields();
+  }, [dataSource]);
+  return {
+    cacheSource: cacheSource,
+    setCacheSource: setCacheSource
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useProps);
+
+/***/ }),
+
+/***/ "./src/useTabChange.ts":
+/*!*****************************!*\
+  !*** ./src/useTabChange.ts ***!
+  \*****************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+
+
+var useTabChange = function useTabChange(curCell, setCurCell, cacheSource, dataIndexMap) {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    // 计算下一行的index
+    function getNextRowIndex(preRowIndex) {
+      var length = cacheSource.length;
+      var i = preRowIndex + 1;
+
+      for (; i < length; i += 1) {
+        if (cacheSource[i].editable !== false) {
+          return i;
+        }
+      }
+
+      return preRowIndex;
+    } // 被 window 监听的键盘事件
+
+
+    function handleTabChange(e) {
+      // 只在按 tab 键并且当前有被激活的单元格才执行
+      if (e.keyCode === 9 && curCell !== null) {
+        e.preventDefault();
+        var rowIndex = curCell.rowIndex,
+            dataIndex = curCell.dataIndex;
+        var index = dataIndexMap.indexOf(dataIndex); // 是否需要换行
+
+        var changeRow = index === dataIndexMap.length - 1;
+        var nextRow = getNextRowIndex(rowIndex);
+        var canChangeRow = cacheSource.length - 1 >= rowIndex + 1 && nextRow !== rowIndex;
+        var nextCell; // 判断切换条件
+
+        if (changeRow && !canChangeRow) {
+          nextCell = null;
+        } else {
+          nextCell = {
+            rowIndex: changeRow ? nextRow : rowIndex,
+            dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1]
+          };
+        }
+
+        setCurCell(nextCell);
+      }
+    } // 绑定
+
+
+    window.addEventListener('keydown', handleTabChange); // 解除
+
+    return function () {
+      window.removeEventListener('keydown', handleTabChange);
+    };
+  });
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (useTabChange);
+
+/***/ }),
+
+/***/ "./src/utils.ts":
+/*!**********************!*\
+  !*** ./src/utils.ts ***!
+  \**********************/
+/*! exports provided: hasData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasData", function() { return hasData; });
+var hasData = function hasData(data) {
+  if (data == null || data === '') {
+    return '--';
+  } else {
+    return data;
+  }
+};
 
 /***/ })
 

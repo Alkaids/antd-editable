@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>simple.js - example - antd-editable@2.3.0</title>
+  <title>simple.js - example - antd-editable@2.4.1</title>
   <meta name="viewport"
         content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
   <meta charset="utf-8"/>
@@ -263,66 +263,66 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
 <body>
   <div class="container">
     <div class="header">
-      <h1>antd-editable@2.3.0</h1>
+      <h1>antd-editable@2.4.1</h1>
 
       <p></p>
     </div>
     <div class="example" id="__react-content"></div>
 
-    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">"react"</span>;
-<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">"react-dom"</span>;
-<span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">"../src"</span>;
+    <div class="highlight"><pre><code language="js"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>;
+<span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>;
+<span class="hljs-keyword">import</span> Editable <span class="hljs-keyword">from</span> <span class="hljs-string">'../src'</span>;
 
 <span class="hljs-keyword">const</span> warraperStyle = {
   width: <span class="hljs-number">600</span>,
-  margin: <span class="hljs-string">"50px auto"</span>
+  margin: <span class="hljs-string">'50px auto'</span>,
 };
 
 <span class="hljs-keyword">const</span> dataSource = [
   {
-    key: <span class="hljs-string">"1"</span>,
-    name: <span class="hljs-string">"金鑫"</span>,
+    key: <span class="hljs-string">'1'</span>,
+    name: <span class="hljs-string">'金鑫'</span>,
     age: <span class="hljs-number">16</span>,
-    address: <span class="hljs-string">"慕和兰道304"</span>
+    address: <span class="hljs-string">'慕和兰道304'</span>,
   },
   {
-    key: <span class="hljs-string">"2"</span>,
-    name: <span class="hljs-string">"张海新"</span>,
+    key: <span class="hljs-string">'2'</span>,
+    name: <span class="hljs-string">'张海新'</span>,
     age: <span class="hljs-number">17</span>,
-    address: <span class="hljs-string">"慕和兰道304"</span>,
-    editable: <span class="hljs-literal">false</span>
+    address: <span class="hljs-string">'慕和兰道304'</span>,
+    editable: <span class="hljs-literal">false</span>,
   },
   {
-    key: <span class="hljs-string">"3"</span>,
-    name: <span class="hljs-string">"李鳌"</span>,
+    key: <span class="hljs-string">'3'</span>,
+    name: <span class="hljs-string">'李鳌'</span>,
     age: <span class="hljs-number">15</span>,
-    address: <span class="hljs-string">"慕和兰道304"</span>
-  }
+    address: <span class="hljs-string">'慕和兰道304'</span>,
+  },
 ];
 
 <span class="hljs-keyword">const</span> columns = [
   {
-    title: <span class="hljs-string">"姓名"</span>,
-    dataIndex: <span class="hljs-string">"name"</span>,
-    key: <span class="hljs-string">"name"</span>,
-    width: <span class="hljs-string">"30%"</span>
+    title: <span class="hljs-string">'姓名'</span>,
+    dataIndex: <span class="hljs-string">'name'</span>,
+    key: <span class="hljs-string">'name'</span>,
+    width: <span class="hljs-string">'30%'</span>,
   },
   {
-    title: <span class="hljs-string">"年龄"</span>,
-    dataIndex: <span class="hljs-string">"age"</span>,
-    key: <span class="hljs-string">"age"</span>,
-    width: <span class="hljs-string">"30%"</span>
+    title: <span class="hljs-string">'年龄'</span>,
+    dataIndex: <span class="hljs-string">'age'</span>,
+    key: <span class="hljs-string">'age'</span>,
+    width: <span class="hljs-string">'30%'</span>,
   },
   {
-    title: <span class="hljs-string">"住址"</span>,
-    dataIndex: <span class="hljs-string">"address"</span>,
-    key: <span class="hljs-string">"address"</span>,
-    editable: <span class="hljs-literal">false</span>
-  }
+    title: <span class="hljs-string">'住址'</span>,
+    dataIndex: <span class="hljs-string">'address'</span>,
+    key: <span class="hljs-string">'address'</span>,
+    editable: <span class="hljs-literal">false</span>,
+  },
 ];
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleTableChange</span>(<span class="hljs-params">nextSource</span>) </span>{
-  <span class="hljs-built_in">console</span>.log(nextSource); 
+  <span class="hljs-built_in">console</span>.log(nextSource);
 }
 
 <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">App</span>(<span class="hljs-params"></span>) </span>{
@@ -339,7 +339,7 @@ Monokai Sublime style. Derived from Monokai by noformnocontent http://nn.mit-lic
   )</span>;
 }
 
-ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById("__react-content"));
+ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">App</span> /&gt;</span>, document.getElementById('__react-content'));
 </span></code></pre></div>
   </div>
   <a href="http://github.com/Alkaids/antd-editable">
