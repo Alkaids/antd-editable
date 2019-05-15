@@ -74669,8 +74669,7 @@ var Editable = function Editable(_a) {
       btnProps = _a$btnProps === void 0 ? btnDefaultProps : _a$btnProps,
       _a$onCellChange = _a.onCellChange,
       onCellChange = _a$onCellChange === void 0 ? noop : _a$onCellChange,
-      _a$onSubmit = _a.onSubmit,
-      onSubmit = _a$onSubmit === void 0 ? noop : _a$onSubmit,
+      onSubmit = _a.onSubmit,
       resProps = __rest(_a, ["dataSource", "columns", "form", "btnProps", "onCellChange", "onSubmit"]);
 
   var _useProps = Object(_useProps__WEBPACK_IMPORTED_MODULE_7__["default"])(dataSource, columns, onCellChange, form),
@@ -74681,7 +74680,7 @@ var Editable = function Editable(_a) {
       restBtnProps = __rest(btnProps, ["text"]);
 
   function handleSubmit() {
-    onSubmit(cacheSource);
+    if (onSubmit) onSubmit(cacheSource);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
