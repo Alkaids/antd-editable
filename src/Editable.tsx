@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect } from 'react';
 import { Table, Form, Button } from 'antd';
 import { TableProps, ColumnProps } from 'antd/lib/table';
 import { ValidationRule, FormComponentProps } from 'antd/lib/form';
@@ -37,7 +37,7 @@ const Editable: FC<WrappProps> = ({
   form,
   btnProps = btnDefaultProps,
   onCellChange = noop,
-  onSubmit = noop,
+  onSubmit,
   ...resProps
 }) => {
   const { cacheSource, editColumns } = useProps(dataSource, columns, onCellChange, form);
@@ -45,7 +45,7 @@ const Editable: FC<WrappProps> = ({
   const { text: btnText, ...restBtnProps } = btnProps;
 
   function handleSubmit() {
-    onSubmit(cacheSource);
+    if (onSubmit) onSubmit(cacheSource);
   }
 
   return (
