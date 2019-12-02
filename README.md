@@ -5,6 +5,15 @@
 [![NPM version](https://img.shields.io/npm/v/antd-editable.svg?style=flat)](https://npmjs.org/package/antd-editable)
 [![NPM downloads](https://img.shields.io/npm/dm/antd-editable.svg?style=flat)](https://npmjs.org/package/antd-editable)
 
+## Features
+
+-   [x] 行/列可编辑
+-   [x] tab 键切换
+-   [x] 自定义表单数据校验
+-   [x] typescript 支持
+-   [x] 支持 Select 控件
+-   [x] 行/列/单元格禁用
+
 ## 何时使用
 
 当表格涉及到内容的修改的时候
@@ -87,17 +96,6 @@
 ```
 
 [更多用法](https://alkaids.github.io/antd-editable/)
-
-## Features
-
--   [x] 行列可编辑
--   [x] css in js
--   [x] tab 键切换
--   [x] 自定义表单数据校验
--   [x] typescript 重构
--   [ ] 未保存数据提示
--   [ ] 可分页
--   [ ] 自动化测试
 
 ## API
 
@@ -182,15 +180,29 @@
                 btnProps
             </td>
             <td>
-                保存按钮的props, 与onSubmit联用, 可用 text 属性设置按钮文字
+                保存按钮的props, 与onSubmit联用
             </td> 
             <td>
                 object
             </td>  
             <td>
-                { text: '保存', style: { marginTop: 10 } }
+                { style: { marginTop: 10 } }
             </td>                 
-        </tr>         
+        </tr>  
+        <tr>
+            <td>
+                btnText
+            </td>
+            <td>
+                保存按钮的文字, 与onSubmit联用
+            </td> 
+            <td>
+                string
+            </td>  
+            <td>
+                '保存'
+            </td>                 
+        </tr>          
         <tr>
             <td>
                 -

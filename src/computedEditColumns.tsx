@@ -2,7 +2,7 @@ import * as React from 'react';
 
 import { EditableColumn } from './Editable';
 import Cell, { CellType } from './Cell';
-import { hasData } from './utils';
+import { hasData } from './_utils';
 
 export default <T extends object>(
   columns: Array<EditableColumn<T>>,
@@ -10,8 +10,9 @@ export default <T extends object>(
   setCurCell: any,
   form: any,
 ) => {
-  const dataIndexMap: string[] = [];
-  const loopColumns = (lColumns: Array<EditableColumn<T>>): T[] => {
+  const dataIndexMap: string[][] = [];
+  const loopColumns = (lColumns: Array<EditableColumn<T>>): Array<EditableColumn<T>> => {
+    let dataIndexMapItem: string[] = [];
     return lColumns.map((item: any) => {
       if (item.children) {
         const { children, ...resCol } = item;
@@ -20,10 +21,7 @@ export default <T extends object>(
           children: loopColumns(children),
         };
       } else {
-        const { render, dataIndex, editable = true, rules, children, ...res } = item;
-        if (editable) {
-          dataIndexMap.push(dataIndex);
-        }
+        const { render, dataIndex, editable = true, rules, isSelect, children, ...res } = item;
         const resItem = {
           dataIndex,
           ...res,
@@ -31,7 +29,19 @@ export default <T extends object>(
             // 注意 editable 字段来自dataSource（通常由后端控制），用于控制行是否可编辑
             const { editable: rowEditbale = true } = record;
             const initialValue = hasData(render ? render(text, record, rowIndex) : text);
-            if (rowEditbale && editable) {
+            const canRowEditbale: boolean =
+              typeof rowEditbale === 'boolean'
+                ? rowEditbale
+                : (function foo() {
+                    const { disabled = [] } = rowEditbale;
+                    return !disabled.includes(dataIndex);
+                  })();
+            if (editable && canRowEditbale) {
+              // magic code
+              dataIndexMapItem.includes(dataIndex)
+                ? (dataIndexMapItem = [dataIndex])
+                : dataIndexMapItem.push(dataIndex);
+              dataIndexMap[rowIndex] = dataIndexMapItem;
               const cellprops = {
                 form,
                 key: `${dataIndex}-${rowIndex}`,
@@ -41,6 +51,7 @@ export default <T extends object>(
                 onSetCurCell: setCurCell,
                 initialValue,
                 rules,
+                isSelect,
               };
               return <Cell {...cellprops} />;
             }

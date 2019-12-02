@@ -9,7 +9,13 @@ import { EditableColumn } from './Editable';
 const useProps = <T extends object>(
   dataSource: T[],
   columns: Array<EditableColumn<T>>,
-  onCellChange: (nextSource: T[]) => void,
+  onCellChange: (
+    nextSource: T[],
+    curValue: any,
+    beforeValue: any,
+    rowIndex: number,
+    dataIndex: string,
+  ) => void,
   form: any,
 ) => {
   // 当前被激活的单元格，默认为null
@@ -27,6 +33,9 @@ const useProps = <T extends object>(
     [columns, curCell],
   );
 
+  const hasError: boolean =
+    curCell && form.getFieldError(`${curCell!.dataIndex}-${curCell!.rowIndex}`);
+
   // tab键切换
   useTabChange(curCell, handleSetCurCell, cacheSource, dataIndexMap);
 
@@ -39,7 +48,7 @@ const useProps = <T extends object>(
         draft[rowIndex][dataIndex] = value;
       });
       setCacheSource(nextSource);
-      onCellChange(nextSource);
+      onCellChange(nextSource, value, cacheSource[rowIndex][dataIndex], rowIndex, dataIndex);
     }
     // 重新设置 Ref 记录的值
     beforeCell.current = curCell;
@@ -47,7 +56,7 @@ const useProps = <T extends object>(
 
   function handleSetCurCell(nextCell: CellType) {
     //  当前单元格有错误的话则禁止切换
-    if (!curCell || !form.getFieldError(`${curCell!.dataIndex}-${curCell!.rowIndex}`)) {
+    if (!hasError) {
       setCurCell(nextCell);
     }
   }
@@ -55,6 +64,7 @@ const useProps = <T extends object>(
   return {
     cacheSource,
     editColumns,
+    hasError,
   };
 };
 

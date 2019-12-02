@@ -1,4 +1,3 @@
-import Editable, { EditableColumn, EditableProps } from './Editable';
-
-export { EditableColumn, EditableProps };
+import Editable from './Editable';
+export * from './Editable';
 export default Editable;

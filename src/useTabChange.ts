@@ -6,19 +6,17 @@ const useTabChange = (
   curCell: CellType,
   setCurCell: any,
   cacheSource: any[],
-  dataIndexMap: string[],
+  dataIndexMap: string[][],
 ) => {
   useEffect(() => {
     // 计算下一行的index
-    function getNextRowIndex(preRowIndex: number): number {
-      const length = cacheSource.length;
+    function getNextRowIndex(preRowIndex: number, dataSource: any[]): number {
+      const length = dataIndexMap.length;
       let i = preRowIndex + 1;
-      for (; i < length; i += 1) {
-        if (cacheSource[i].editable !== false) {
-          return i;
-        }
+      while (dataSource[i] && dataSource[i].editable === false) {
+        i++;
       }
-      return preRowIndex;
+      return length > i ? i : preRowIndex;
     }
 
     // 被 window 监听的键盘事件
@@ -27,22 +25,24 @@ const useTabChange = (
       if (e.keyCode === 9 && curCell !== null) {
         e.preventDefault();
         const { rowIndex, dataIndex } = curCell!;
-        const index: number = dataIndexMap.indexOf(dataIndex);
+        const dataIndexMapItem = dataIndexMap[rowIndex];
+        const index: number = dataIndexMapItem.indexOf(dataIndex);
 
         // 是否需要换行
-        const changeRow: boolean = index === dataIndexMap.length - 1;
-        const nextRow: number = getNextRowIndex(rowIndex);
+        const changeRow: boolean = index === dataIndexMapItem.length - 1;
+        const nextRow: number = getNextRowIndex(rowIndex, cacheSource);
         const canChangeRow: boolean =
           cacheSource.length - 1 >= rowIndex + 1 && nextRow !== rowIndex;
 
         let nextCell: CellType;
+
         // 判断切换条件
         if (changeRow && !canChangeRow) {
           nextCell = null;
         } else {
           nextCell = {
             rowIndex: changeRow ? nextRow : rowIndex,
-            dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1],
+            dataIndex: changeRow ? dataIndexMap[nextRow][0] : dataIndexMapItem[index + 1],
           };
         }
         setCurCell(nextCell);
