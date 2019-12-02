@@ -74531,16 +74531,24 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var antd_es_input_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! antd/es/input/style/css */ "./node_modules/antd/es/input/style/css.js");
 /* harmony import */ var antd_es_input__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! antd/es/input */ "./node_modules/antd/es/input/index.js");
-/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
-/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var antd_es_select_style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! antd/es/select/style/css */ "./node_modules/antd/es/select/style/css.js");
+/* harmony import */ var antd_es_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! antd/es/select */ "./node_modules/antd/es/select/index.js");
+/* harmony import */ var antd_es_form_style_css__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! antd/es/form/style/css */ "./node_modules/antd/es/form/style/css.js");
+/* harmony import */ var antd_es_form__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! antd/es/form */ "./node_modules/antd/es/form/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
 
 
-var Item = antd_es_form__WEBPACK_IMPORTED_MODULE_3__["default"].Item;
+
+
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+var Item = antd_es_form__WEBPACK_IMPORTED_MODULE_5__["default"].Item;
+var Option = antd_es_select__WEBPACK_IMPORTED_MODULE_3__["default"].Option;
 
 var Cell = function Cell(_ref) {
   var form = _ref.form,
@@ -74550,17 +74558,27 @@ var Cell = function Cell(_ref) {
       onSetCurCell = _ref.onSetCurCell,
       initialValue = _ref.initialValue,
       _ref$rules = _ref.rules,
-      rules = _ref$rules === void 0 ? [] : _ref$rules;
+      rules = _ref$rules === void 0 ? [] : _ref$rules,
+      isSelect = _ref.isSelect;
   // 是否处于可编辑状态
   var isEditing = !!curCell && curCell.dataIndex === dataIndex && curCell.rowIndex === rowIndex; // input的Ref，用于激活后的focus
 
   var inputRef = useFocus(isEditing); // 将当前的Cell激活
 
   function handleSetCurCell() {
-    onSetCurCell({
-      dataIndex: dataIndex,
-      rowIndex: rowIndex
-    });
+    if (curCell) {
+      form.validateFields(["".concat(curCell.dataIndex, "-").concat(curCell.rowIndex)], function (err) {
+        if (!err) onSetCurCell({
+          dataIndex: dataIndex,
+          rowIndex: rowIndex
+        });
+      });
+    } else {
+      onSetCurCell({
+        dataIndex: dataIndex,
+        rowIndex: rowIndex
+      });
+    }
   } // 保存值到表单域里
 
 
@@ -74573,27 +74591,62 @@ var Cell = function Cell(_ref) {
   } // 静态值
 
 
-  var stockCell = react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+  var stockCell = react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
     onClick: handleSetCurCell,
     className: "editable-cell-value-wrap"
-  }, initialValue);
-  return react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement("div", {
+  }, Array.isArray(isSelect) ? function foo() {
+    var target = isSelect.find(function (_ref2) {
+      var value = _ref2.value;
+      return value === initialValue;
+    });
+    return target ? target.label : initialValue;
+  }() : initialValue); // 获取控件
+
+  var getFormItem = function getFormItem() {
+    if (isSelect) {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_select__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        onChange: handleSave,
+        ref: inputRef,
+        onBlur: handleSave,
+        style: {
+          width: '100%'
+        }
+      }, Array.isArray(isSelect) && isSelect.map(function (item, index) {
+        return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Option, {
+          key: index,
+          value: item.value
+        }, item.label);
+      }));
+    } else {
+      return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_input__WEBPACK_IMPORTED_MODULE_1__["default"], {
+        ref: inputRef,
+        onPressEnter: handleSave,
+        onBlur: handleSave
+      });
+    }
+  };
+
+  var rulesWithCellInfo = rules.map(function (item) {
+    var _validator = item.validator;
+    return _validator ? _extends({}, item, {
+      validator: function validator(rule, value, callback) {
+        _validator(rule, value, callback, curCell);
+      }
+    }) : item;
+  });
+  return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement("div", {
     style: {
       textAlign: 'left'
     }
-  }, react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(Item, null, form.getFieldDecorator("".concat(dataIndex, "-").concat(rowIndex), {
+  }, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(Item, null, form.getFieldDecorator("".concat(dataIndex, "-").concat(rowIndex), {
     initialValue: initialValue === '--' ? '' : initialValue,
-    rules: rules
-  })(isEditing ? react__WEBPACK_IMPORTED_MODULE_4___default.a.createElement(antd_es_input__WEBPACK_IMPORTED_MODULE_1__["default"], {
-    ref: inputRef,
-    onPressEnter: handleSave,
-    onBlur: handleSave
-  }) : stockCell)));
+    rules: rulesWithCellInfo
+  })(isEditing ? getFormItem() : stockCell)));
 };
 
 var useFocus = function useFocus(isEditing) {
-  var inputRef = react__WEBPACK_IMPORTED_MODULE_4___default.a.createRef();
-  Object(react__WEBPACK_IMPORTED_MODULE_4__["useEffect"])(function () {
+  var inputRef = react__WEBPACK_IMPORTED_MODULE_6___default.a.createRef();
+  Object(react__WEBPACK_IMPORTED_MODULE_6__["useEffect"])(function () {
     if (isEditing) {
       if (inputRef.current) inputRef.current.focus();
     }
@@ -74650,54 +74703,71 @@ var __rest = undefined && undefined.__rest || function (s, e) {
 
 
 
-function noop() {}
-
-var btnDefaultProps = {
-  text: '保存',
-  style: {
-    marginTop: 10
-  }
-};
-
 var Editable = function Editable(_a) {
   var _a$dataSource = _a.dataSource,
       dataSource = _a$dataSource === void 0 ? [] : _a$dataSource,
       _a$columns = _a.columns,
       columns = _a$columns === void 0 ? [] : _a$columns,
-      form = _a.form,
-      _a$btnProps = _a.btnProps,
-      btnProps = _a$btnProps === void 0 ? btnDefaultProps : _a$btnProps,
       _a$onCellChange = _a.onCellChange,
-      onCellChange = _a$onCellChange === void 0 ? noop : _a$onCellChange,
+      onCellChange = _a$onCellChange === void 0 ? function () {} : _a$onCellChange,
+      _a$btnProps = _a.btnProps,
+      btnProps = _a$btnProps === void 0 ? {
+    style: {
+      marginTop: 10
+    }
+  } : _a$btnProps,
+      _a$btnText = _a.btnText,
+      btnText = _a$btnText === void 0 ? '保存' : _a$btnText,
+      form = _a.form,
+      pagination = _a.pagination,
       onSubmit = _a.onSubmit,
-      resProps = __rest(_a, ["dataSource", "columns", "form", "btnProps", "onCellChange", "onSubmit"]);
+      resProps = __rest(_a, ["dataSource", "columns", "onCellChange", "btnProps", "btnText", "form", "pagination", "onSubmit"]);
 
   var _useProps = Object(_useProps__WEBPACK_IMPORTED_MODULE_7__["default"])(dataSource, columns, onCellChange, form),
       cacheSource = _useProps.cacheSource,
-      editColumns = _useProps.editColumns;
-
-  var btnText = btnProps.text,
-      restBtnProps = __rest(btnProps, ["text"]);
+      editColumns = _useProps.editColumns,
+      hasError = _useProps.hasError;
 
   function handleSubmit() {
     if (onSubmit) onSubmit(cacheSource);
   }
 
   return react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(_style_EditableWrapper__WEBPACK_IMPORTED_MODULE_8__["default"], null, react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_table__WEBPACK_IMPORTED_MODULE_5__["default"], _extends({
-    className: "editable",
+    className: "metro-editable",
     dataSource: cacheSource,
     columns: editColumns,
     rowClassName: function rowClassName() {
-      return 'editable-row';
-    }
-  }, resProps, {
-    pagination: false
-  })), onSubmit && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_button__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
-    onClick: handleSubmit
-  }, restBtnProps), btnText));
+      return 'metro-editable-row';
+    },
+    pagination: pagination || false
+  }, resProps)), onSubmit && react__WEBPACK_IMPORTED_MODULE_6___default.a.createElement(antd_es_button__WEBPACK_IMPORTED_MODULE_3__["default"], _extends({
+    onClick: handleSubmit,
+    disabled: hasError,
+    className: "metro-editable-submitBtn"
+  }, btnProps), btnText));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (antd_es_form__WEBPACK_IMPORTED_MODULE_1__["default"].create()(Editable));
+
+/***/ }),
+
+/***/ "./src/_utils/index.ts":
+/*!*****************************!*\
+  !*** ./src/_utils/index.ts ***!
+  \*****************************/
+/*! exports provided: hasData */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasData", function() { return hasData; });
+var hasData = function hasData(data) {
+  if (data == null || data === '') {
+    return '--';
+  } else {
+    return data;
+  }
+};
 
 /***/ }),
 
@@ -74713,7 +74783,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Cell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Cell */ "./src/Cell.tsx");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils */ "./src/utils.ts");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./_utils */ "./src/_utils/index.ts");
 function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
 
 var __rest = undefined && undefined.__rest || function (s, e) {
@@ -74736,6 +74806,7 @@ var __rest = undefined && undefined.__rest || function (s, e) {
   var dataIndexMap = [];
 
   var loopColumns = function loopColumns(lColumns) {
+    var dataIndexMapItem = [];
     return lColumns.map(function (item) {
       if (item.children) {
         var children = item.children,
@@ -74750,12 +74821,9 @@ var __rest = undefined && undefined.__rest || function (s, e) {
             _item$editable = item.editable,
             editable = _item$editable === void 0 ? true : _item$editable,
             rules = item.rules,
+            isSelect = item.isSelect,
             _children = item.children,
-            res = __rest(item, ["render", "dataIndex", "editable", "rules", "children"]);
-
-        if (editable) {
-          dataIndexMap.push(dataIndex);
-        }
+            res = __rest(item, ["render", "dataIndex", "editable", "rules", "isSelect", "children"]);
 
         var resItem = _extends({
           dataIndex: dataIndex
@@ -74765,8 +74833,16 @@ var __rest = undefined && undefined.__rest || function (s, e) {
             var _record$editable = record.editable,
                 rowEditbale = _record$editable === void 0 ? true : _record$editable;
             var initialValue = Object(_utils__WEBPACK_IMPORTED_MODULE_2__["hasData"])(_render ? _render(text, record, rowIndex) : text);
+            var canRowEditbale = typeof rowEditbale === 'boolean' ? rowEditbale : function foo() {
+              var _rowEditbale$disabled = rowEditbale.disabled,
+                  disabled = _rowEditbale$disabled === void 0 ? [] : _rowEditbale$disabled;
+              return !disabled.includes(dataIndex);
+            }();
 
-            if (rowEditbale && editable) {
+            if (editable && canRowEditbale) {
+              // magic code
+              dataIndexMapItem.includes(dataIndex) ? dataIndexMapItem = [dataIndex] : dataIndexMapItem.push(dataIndex);
+              dataIndexMap[rowIndex] = dataIndexMapItem;
               var cellprops = {
                 form: form,
                 key: "".concat(dataIndex, "-").concat(rowIndex),
@@ -74775,7 +74851,8 @@ var __rest = undefined && undefined.__rest || function (s, e) {
                 curCell: curCell,
                 onSetCurCell: setCurCell,
                 initialValue: initialValue,
-                rules: rules
+                rules: rules,
+                isSelect: isSelect
               };
               return react__WEBPACK_IMPORTED_MODULE_0__["createElement"](_Cell__WEBPACK_IMPORTED_MODULE_1__["default"], cellprops);
             }
@@ -74803,17 +74880,13 @@ var __rest = undefined && undefined.__rest || function (s, e) {
 /*!**********************!*\
   !*** ./src/index.ts ***!
   \**********************/
-/*! exports provided: EditableColumn, EditableProps, default */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Editable__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Editable */ "./src/Editable.tsx");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditableColumn", function() { return _Editable__WEBPACK_IMPORTED_MODULE_0__["EditableColumn"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "EditableProps", function() { return _Editable__WEBPACK_IMPORTED_MODULE_0__["EditableProps"]; });
-
-
+/* empty/unused harmony star reexport */
 
 /* harmony default export */ __webpack_exports__["default"] = (_Editable__WEBPACK_IMPORTED_MODULE_0__["default"]);
 
@@ -74831,7 +74904,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EditableWrapper", function() { return EditableWrapper; });
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! styled-components */ "./node_modules/styled-components/dist/styled-components.browser.esm.js");
 function _templateObject() {
-  var data = _taggedTemplateLiteral(["\n  .ant-form-item {\n    margin-bottom: 0;\n  }\n  .ant-form-item-control {\n    line-height: 24px;\n  }\n  .editable-cell-uneditable {\n    padding: 5px 12px;\n  }\n  .editable-cell-value-wrap {\n    padding: 5px 12px;\n    cursor: pointer;\n  }\n  .editable-row:hover {\n    .editable-cell-value-wrap {\n      border: 1px solid #d9d9d9;\n      border-radius: 4px;\n      padding: 4px 11px;\n    }\n  }\n"]);
+  var data = _taggedTemplateLiteral(["\n  .metro-editable {\n    table {\n      table-layout: fixed;\n\n      .ant-table-thead > tr > th {\n        white-space: nowrap;\n      }\n\n      .ant-table-tbody > tr > td {\n        overflow: hidden;\n        text-overflow: unset;\n        word-break: break-all;\n        .ant-form-item {\n          margin-bottom: 0;\n          .ant-form-item-control {\n            line-height: 24px;\n          }\n        }\n      }\n\n      .metro-editable-row {\n        .editable-cell-uneditable {\n          padding: 5px 12px;\n        }\n        .editable-cell-value-wrap {\n          padding: 5px 12px;\n          cursor: pointer;\n        }\n        &:hover {\n          .editable-cell-value-wrap {\n            border: 1px solid #d9d9d9;\n            border-radius: 4px;\n            padding: 4px 11px;\n            cursor: pointer;\n          }\n        }\n      }\n    }\n  }\n"]);
 
   _templateObject = function _templateObject() {
     return data;
@@ -74894,8 +74967,9 @@ var useProps = function useProps(dataSource, columns, onCellChange, form) {
     return Object(_computedEditColumns__WEBPACK_IMPORTED_MODULE_3__["default"])(columns, curCell, handleSetCurCell, form);
   }, [columns, curCell]),
       editColumns = _useMemo.editColumns,
-      dataIndexMap = _useMemo.dataIndexMap; // tab键切换
+      dataIndexMap = _useMemo.dataIndexMap;
 
+  var hasError = curCell && form.getFieldError("".concat(curCell.dataIndex, "-").concat(curCell.rowIndex)); // tab键切换
 
   Object(_useTabChange__WEBPACK_IMPORTED_MODULE_2__["default"])(curCell, handleSetCurCell, cacheSource, dataIndexMap); // 每当 curCell 更变后，更改缓存的 dataSource 。 并且执行 onCellChange
 
@@ -74909,7 +74983,7 @@ var useProps = function useProps(dataSource, columns, onCellChange, form) {
         draft[rowIndex][dataIndex] = value;
       });
       setCacheSource(nextSource);
-      onCellChange(nextSource);
+      onCellChange(nextSource, value, cacheSource[rowIndex][dataIndex], rowIndex, dataIndex);
     } // 重新设置 Ref 记录的值
 
 
@@ -74918,14 +74992,15 @@ var useProps = function useProps(dataSource, columns, onCellChange, form) {
 
   function handleSetCurCell(nextCell) {
     //  当前单元格有错误的话则禁止切换
-    if (!curCell || !form.getFieldError("".concat(curCell.dataIndex, "-").concat(curCell.rowIndex))) {
+    if (!hasError) {
       setCurCell(nextCell);
     }
   }
 
   return {
     cacheSource: cacheSource,
-    editColumns: editColumns
+    editColumns: editColumns,
+    hasError: hasError
   };
 };
 
@@ -74966,17 +75041,15 @@ __webpack_require__.r(__webpack_exports__);
 var useTabChange = function useTabChange(curCell, setCurCell, cacheSource, dataIndexMap) {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
     // 计算下一行的index
-    function getNextRowIndex(preRowIndex) {
-      var length = cacheSource.length;
+    function getNextRowIndex(preRowIndex, dataSource) {
+      var length = dataIndexMap.length;
       var i = preRowIndex + 1;
 
-      for (; i < length; i += 1) {
-        if (cacheSource[i].editable !== false) {
-          return i;
-        }
+      while (dataSource[i] && dataSource[i].editable === false) {
+        i++;
       }
 
-      return preRowIndex;
+      return length > i ? i : preRowIndex;
     } // 被 window 监听的键盘事件
 
 
@@ -74986,10 +75059,11 @@ var useTabChange = function useTabChange(curCell, setCurCell, cacheSource, dataI
         e.preventDefault();
         var rowIndex = curCell.rowIndex,
             dataIndex = curCell.dataIndex;
-        var index = dataIndexMap.indexOf(dataIndex); // 是否需要换行
+        var dataIndexMapItem = dataIndexMap[rowIndex];
+        var index = dataIndexMapItem.indexOf(dataIndex); // 是否需要换行
 
-        var changeRow = index === dataIndexMap.length - 1;
-        var nextRow = getNextRowIndex(rowIndex);
+        var changeRow = index === dataIndexMapItem.length - 1;
+        var nextRow = getNextRowIndex(rowIndex, cacheSource);
         var canChangeRow = cacheSource.length - 1 >= rowIndex + 1 && nextRow !== rowIndex;
         var nextCell; // 判断切换条件
 
@@ -74998,7 +75072,7 @@ var useTabChange = function useTabChange(curCell, setCurCell, cacheSource, dataI
         } else {
           nextCell = {
             rowIndex: changeRow ? nextRow : rowIndex,
-            dataIndex: changeRow ? dataIndexMap[0] : dataIndexMap[index + 1]
+            dataIndex: changeRow ? dataIndexMap[nextRow][0] : dataIndexMapItem[index + 1]
           };
         }
 
@@ -75016,26 +75090,6 @@ var useTabChange = function useTabChange(curCell, setCurCell, cacheSource, dataI
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (useTabChange);
-
-/***/ }),
-
-/***/ "./src/utils.ts":
-/*!**********************!*\
-  !*** ./src/utils.ts ***!
-  \**********************/
-/*! exports provided: hasData */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "hasData", function() { return hasData; });
-var hasData = function hasData(data) {
-  if (data == null || data === '') {
-    return '--';
-  } else {
-    return data;
-  }
-};
 
 /***/ })
 

@@ -7,7 +7,7 @@
   <meta charset="utf-8"/>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <link href="//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.3/normalize.css" rel="stylesheet"/>
-  <title>antd-editable@2.4.2 - </title>
+  <title>antd-editable@3.0.0 - </title>
   <style>
     @font-face {
       font-family: octicons-anchor;
@@ -737,7 +737,7 @@
 
 <body>
 <div class="header">
-  <h1>antd-editable@2.4.2</h1>
+  <h1>antd-editable@3.0.0</h1>
 </div>
 <div class="examples">
   <h3>EXAMPLES</h3>
@@ -761,6 +761,14 @@
     <h1>可编辑表格(React hooks)<a id="user-content-可编辑表格(react-hooks)" name="可编辑表格(react-hooks)" class="anchor" aria-hidden="true" href="#可编辑表格(react-hooks)"><span class="octicon octicon-link"></span></a></h1><p>一个基于 <a href="https://ant.design/index-cn" title="null">antd</a> 的 React 组件， 可以编辑表格的内容并实时保存。</p>
 <p><a href="https://npmjs.org/package/antd-editable" title="null"><img src="https://img.shields.io/npm/v/antd-editable.svg?style=flat" alt="NPM version"></a>
 <a href="https://npmjs.org/package/antd-editable" title="null"><img src="https://img.shields.io/npm/dm/antd-editable.svg?style=flat" alt="NPM downloads"></a></p>
+<h2>Features<a id="user-content-features" name="features" class="anchor" aria-hidden="true" href="#features"><span class="octicon octicon-link"></span></a></h2><ul>
+<li>[x] 行/列可编辑</li>
+<li>[x] tab 键切换</li>
+<li>[x] 自定义表单数据校验</li>
+<li>[x] typescript 支持</li>
+<li>[x] 支持 Select 控件</li>
+<li>[x] 行/列/单元格禁用</li>
+</ul>
 <h2>何时使用<a id="user-content-何时使用" name="何时使用" class="anchor" aria-hidden="true" href="#何时使用"><span class="octicon octicon-link"></span></a></h2><p>当表格涉及到内容的修改的时候</p>
 <h2>如何使用<a id="user-content-如何使用" name="如何使用" class="anchor" aria-hidden="true" href="#如何使用"><span class="octicon octicon-link"></span></a></h2><h3>安装<a id="user-content-安装" name="安装" class="anchor" aria-hidden="true" href="#安装"><span class="octicon octicon-link"></span></a></h3><div class="highlight"><pre><code language="undefined">    $ yarn add antd-editable</code></pre></div><h3>使用<a id="user-content-使用" name="使用" class="anchor" aria-hidden="true" href="#使用"><span class="octicon octicon-link"></span></a></h3><p>默认已经开启所有的单元格可编辑。如需禁用某列的可编辑，只需要在传入 columns 里设置对应列的 editable 为 false。 如需禁用某行的可编辑，只需要在传入 dataSource 里设置对应行的 editable 为 false。</p>
 <p>每一次输入框失焦后，会在组件内部保存一个新的 dataSource ，可以传入一个 onCellChange 的回调函数用于捕获这个实时的 dataSource 用于一些类似 dispatch 的操作。</p>
@@ -822,16 +830,6 @@
     /&gt;
 
     ...</code></pre></div><p><a href="https://alkaids.github.io/antd-editable/" title="null">更多用法</a></p>
-<h2>Features<a id="user-content-features" name="features" class="anchor" aria-hidden="true" href="#features"><span class="octicon octicon-link"></span></a></h2><ul>
-<li>[x] 行列可编辑</li>
-<li>[x] css in js</li>
-<li>[x] tab 键切换</li>
-<li>[x] 自定义表单数据校验</li>
-<li>[x] typescript 重构</li>
-<li>[ ] 未保存数据提示</li>
-<li>[ ] 可分页</li>
-<li>[ ] 自动化测试</li>
-</ul>
 <h2>API<a id="user-content-api" name="api" class="anchor" aria-hidden="true" href="#api"><span class="octicon octicon-link"></span></a></h2><p>同 <a href="https://ant.design/components/table-cn/" title="null">antd-table</a> 的 API 。只需在 colums 和 dataSource 里加入 editable 属性控制行列的可编辑。</p>
 <table>
     <thead>
@@ -900,12 +898,23 @@
                 btnProps
             </td>
             <td>
-                保存按钮的props, 与onSubmit联用, 可用 text 属性设置按钮文字
+                保存按钮的props, 与onSubmit联用
             </td> 
             <td>
                 object
             </td><br>            <td>
-                { text: &#39;保存&#39;, style: { marginTop: 10 } }
+                { style: { marginTop: 10 } }
+            </td><br>        </tr><br>        <tr>
+            <td>
+                btnText
+            </td>
+            <td>
+                保存按钮的文字, 与onSubmit联用
+            </td> 
+            <td>
+                string
+            </td><br>            <td>
+                &#39;保存&#39;
             </td><br>        </tr><br>        <tr>
             <td>
                 -
