@@ -24,11 +24,11 @@
     "port": 8000
   },
   "scripts": {
-    "watch-tsc": "rc-tools run watch-tsc",
+    "start": "rc-tools run server",
     "build": "rc-tools run build",
+    "watch-tsc": "rc-tools run watch-tsc",
     "compile": "rc-tools run compile --babel-runtime",
     "gh-pages": "rc-tools run gh-pages",
-    "start": "rc-tools run server",
     "pub": "rc-tools run pub --babel-runtime",
     "test": "rc-tools run test",
     "prepublish": "rc-tools run guard",
