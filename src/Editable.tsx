@@ -3,7 +3,6 @@ import { Form, Button, Table } from 'antd';
 
 import { FormComponentProps, ValidationRule } from 'antd/lib/form';
 import { TableProps, ColumnProps } from 'antd/lib/table';
-import { ButtonProps } from 'antd/lib/button';
 
 import useProps from './useProps';
 
